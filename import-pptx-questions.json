@@ -1,0 +1,1252 @@
+{
+  "questions": [
+    {
+      "certId": "az900",
+      "topic": "Describe Cloud Concepts",
+      "subtopic": "Describe the benefits of using cloud services",
+      "text": "A company plans to host an application on a set of virtual machines in Azure. They want to ensure the application survives a failure across an entire Azure region. Which concept should be considered?",
+      "text_es": "Una empresa planea hospedar una aplicación en un conjunto de máquinas virtuales en Azure. Quieren asegurarse de que la aplicación sobrevive a un error en toda la región en Azure. ¿Cuál de los siguientes conceptos debe considerarse para cumplir con este requisito?",
+      "type": "single",
+      "answers": [
+        {
+          "text": "Disaster recovery",
+          "text_es": "Recuperación ante desastres",
+          "correct": true
+        },
+        {
+          "text": "Elasticity",
+          "text_es": "Elasticidad",
+          "correct": false
+        },
+        {
+          "text": "Agility",
+          "text_es": "Agilidad",
+          "correct": false
+        },
+        {
+          "text": "Scalability",
+          "text_es": "Escalabilidad",
+          "correct": false
+        }
+      ],
+      "explanation": "Disaster recovery is the ability to recover from an event that has taken down a cloud service across an entire region. Cloud disaster recovery can occur very quickly with automation and available services.",
+      "explanation_es": "La recuperación ante desastres es la capacidad de recuperarse de un evento que ha derribado un servicio en la nube de toda la región. La recuperación ante desastres de los servicios en la nube puede ocurrir muy rápidamente, con la automatización y los servicios disponibles."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Azure Architecture and Services",
+      "subtopic": "Describe Azure compute services",
+      "text": "You have an Azure environment. How will you create a new Azure virtual machine from an Android laptop? (Select two)",
+      "text_es": "Tiene un entorno de Azure. ¿Cómo se va a crear una nueva máquina virtual de Azure desde un portátil Android? (Seleccione dos opciones correctas)",
+      "type": "multi",
+      "answers": [
+        {
+          "text": "Azure CLI",
+          "text_es": "CLI de Azure",
+          "correct": false
+        },
+        {
+          "text": "Azure PowerShell for Windows",
+          "text_es": "Azure PowerShell para Windows",
+          "correct": false
+        },
+        {
+          "text": "Using the PowerApps portal",
+          "text_es": "Uso del portal de PowerApps",
+          "correct": false
+        },
+        {
+          "text": "Use PowerShell in Azure Cloud Shell",
+          "text_es": "Use PowerShell en Azure Cloud Shell",
+          "correct": true
+        },
+        {
+          "text": "Using Azure Portal",
+          "text_es": "Uso de Azure Portal",
+          "correct": true
+        }
+      ],
+      "explanation": "Azure Cloud Shell is a browser-based scripting environment in the portal that works from any device. Azure Portal is a public website accessible with any web browser to create and manage Azure services.",
+      "explanation_es": "Azure Cloud Shell es un entorno de scripting basado en explorador en el portal que funciona desde cualquier dispositivo. Azure Portal es un sitio web público accesible con cualquier explorador web para crear y administrar servicios de Azure."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Azure Architecture and Services",
+      "subtopic": "Describe Azure networking services",
+      "text": "You plan to implement a solution that allows on-premises client computers to communicate with Azure VMs. Which two Azure resources should you include? (Select two)",
+      "text_es": "Planea implementar una solución que permita que los equipos cliente de la red local se comuniquen con las máquinas virtuales de Azure. ¿Qué dos recursos de Azure debe incluir en la recomendación?",
+      "type": "multi",
+      "answers": [
+        {
+          "text": "Load balancer",
+          "text_es": "Equilibrador de carga",
+          "correct": false
+        },
+        {
+          "text": "Virtual network",
+          "text_es": "Red virtual",
+          "correct": false
+        },
+        {
+          "text": "Application Gateway",
+          "text_es": "Application Gateway",
+          "correct": false
+        },
+        {
+          "text": "Gateway subnet",
+          "text_es": "Subred de puerta de enlace",
+          "correct": true
+        },
+        {
+          "text": "Virtual network gateway",
+          "text_es": "Puerta de enlace privada de red virtual",
+          "correct": true
+        }
+      ],
+      "explanation": "A VPN gateway is used to send encrypted traffic between an Azure virtual network and an on-premises location over the public Internet. The gateway subnet is used to route traffic between networks.",
+      "explanation_es": "Una puerta de enlace VPN se usa para enviar tráfico cifrado entre una red virtual de Azure y una ubicación local a través de Internet. La subred de puerta de enlace se usa para enrutar el tráfico entre redes."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Azure Architecture and Services",
+      "subtopic": "Describe Azure compute services",
+      "text": "Which Azure term is most closely related to 'serverless computing'?",
+      "text_es": "¿Qué término de Azure está más estrechamente relacionado con la 'informática sin servidor'?",
+      "type": "single",
+      "answers": [
+        {
+          "text": "Virtual Machine",
+          "text_es": "Máquina virtual",
+          "correct": false
+        },
+        {
+          "text": "Hypervisor",
+          "text_es": "Hipervisor",
+          "correct": false
+        },
+        {
+          "text": "Operating System",
+          "text_es": "Sistema operativo",
+          "correct": false
+        },
+        {
+          "text": "Managed Service",
+          "text_es": "Servicio Gestionado",
+          "correct": true
+        }
+      ],
+      "explanation": "Serverless computing eliminates the need to provision or manage servers. Azure provides managed services like Azure Functions, Logic Apps, and Event Grid as key serverless components.",
+      "explanation_es": "La computación sin servidor elimina la necesidad de aprovisionar o administrar servidores. Azure proporciona servicios administrados como Azure Functions, Logic Apps y Event Grid como componentes clave de la informática sin servidor."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Cloud Concepts",
+      "subtopic": "Describe cloud computing",
+      "text": "Which cloud model provides the greatest degree of flexibility?",
+      "text_es": "¿Qué modelo de la nube provee el mayor grado de flexibilidad?",
+      "type": "single",
+      "answers": [
+        {
+          "text": "Private cloud",
+          "text_es": "Nube privada",
+          "correct": false
+        },
+        {
+          "text": "Hybrid cloud",
+          "text_es": "Nube híbrida",
+          "correct": true
+        },
+        {
+          "text": "Public cloud",
+          "text_es": "Nube pública",
+          "correct": false
+        }
+      ],
+      "explanation": "Hybrid cloud gives you the greatest degree of flexibility because you can choose between public or private depending on your requirements.",
+      "explanation_es": "La nube híbrida le brinda el mayor grado de flexibilidad, ya que tiene la opción de elegir entre pública o privada según sus requisitos."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Azure Architecture and Services",
+      "subtopic": "Describe Azure networking services",
+      "text": "Which of the following services is a distributed network of servers that can deliver web content to users efficiently?",
+      "text_es": "¿Cuál de los siguientes servicios es una red distribuida de servidores que puede entregar contenido web a los usuarios de manera eficiente?",
+      "type": "single",
+      "answers": [
+        {
+          "text": "Azure Cosmos DB",
+          "text_es": "Azure Cosmos DB",
+          "correct": false
+        },
+        {
+          "text": "Azure App Service",
+          "text_es": "Servicios de aplicaciones de Azure",
+          "correct": false
+        },
+        {
+          "text": "Azure Traffic Manager",
+          "text_es": "Administrador de tráfico de Azure",
+          "correct": false
+        },
+        {
+          "text": "Azure Content Delivery Network (CDN)",
+          "text_es": "Red de entrega de contenido (CDN) de Azure",
+          "correct": true
+        }
+      ],
+      "explanation": "A CDN is a distributed network of servers that can deliver web content to users efficiently by caching content at edge locations to minimize latency.",
+      "explanation_es": "Un CDN es una red distribuida de servidores que puede entregar contenido web a los usuarios de forma eficaz, almacenando contenido en caché en ubicaciones perimetrales para minimizar la latencia."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Azure Management and Governance",
+      "subtopic": "Describe features and tools in Azure for governance and compliance",
+      "text": "Your company has an Azure environment with resources in multiple regions. A policy states that administrators should only be able to create resources in the region where their office is located. What should you use?",
+      "text_es": "Su empresa tiene un entorno de Azure que contiene recursos en varias regiones. Una directiva establece que los administradores solo deben poder crear recursos en la región donde se encuentra su oficina. ¿Qué debe usar?",
+      "type": "single",
+      "answers": [
+        {
+          "text": "Azure resource lock",
+          "text_es": "Bloqueo de Azure en grupo de recursos",
+          "correct": false
+        },
+        {
+          "text": "Reservation",
+          "text_es": "Reserva",
+          "correct": false
+        },
+        {
+          "text": "Management group",
+          "text_es": "Grupo de gestión",
+          "correct": false
+        },
+        {
+          "text": "Azure Policy",
+          "text_es": "Directiva de Azure",
+          "correct": true
+        }
+      ],
+      "explanation": "Azure Policy helps enforce organizational standards and assess compliance at scale. You can create a policy to validate resource creation only in the desired region.",
+      "explanation_es": "Azure Policy ayuda a aplicar los estándares de la organización y a evaluar el cumplimiento a escala. Puede crear una directiva para validar que los recursos se creen solo en la región deseada."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Azure Architecture and Services",
+      "subtopic": "Describe the core architectural components of Azure",
+      "text": "Which of the following statements about the Azure Government service is correct?",
+      "text_es": "¿Cuál de las siguientes afirmaciones sobre el servicio Azure Government es correcta?",
+      "type": "single",
+      "answers": [
+        {
+          "text": "Separate datacenters are used",
+          "text_es": "Se utilizan centros de datos independientes",
+          "correct": true
+        },
+        {
+          "text": "Standard Azure datacenters are used",
+          "text_es": "Se usan centros de datos estándar de Azure",
+          "correct": false
+        },
+        {
+          "text": "Only ExpressRoute network connectivity is allowed",
+          "text_es": "Solo se permite la conectividad de red a través de ExpressRoute",
+          "correct": false
+        },
+        {
+          "text": "There are more reserved subnet IP addresses than standard Azure",
+          "text_es": "Hay más direcciones IP de subred reservadas que con las subredes estándar",
+          "correct": false
+        }
+      ],
+      "explanation": "Azure Government provides a dedicated cloud using separate datacenters, enabling government agencies and their partners to transform mission-critical workloads to the cloud.",
+      "explanation_es": "Azure Government proporciona una nube dedicada mediante centros de datos independientes, permitiendo a las agencias gubernamentales transformar cargas de trabajo críticas en la nube."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Azure Architecture and Services",
+      "subtopic": "Describe Azure identity, access, and security",
+      "text": "How can the IT department ensure that employees at retail stores can only access company applications from approved tablets?",
+      "text_es": "¿Cómo puede el departamento de TI garantizar que los empleados de las tiendas minoristas puedan acceder a las aplicaciones de la empresa solo desde tabletas aprobadas?",
+      "type": "single",
+      "answers": [
+        {
+          "text": "SSO",
+          "text_es": "SSO",
+          "correct": false
+        },
+        {
+          "text": "Multi-factor authentication",
+          "text_es": "Autenticación multifactor",
+          "correct": false
+        },
+        {
+          "text": "Azure Policy",
+          "text_es": "Azure Policy",
+          "correct": false
+        },
+        {
+          "text": "Conditional Access",
+          "text_es": "Acceso condicional",
+          "correct": true
+        }
+      ],
+      "explanation": "Conditional Access allows you to require users to access applications only from approved or managed devices.",
+      "explanation_es": "El acceso condicional permite exigir a los usuarios que accedan a las aplicaciones solo desde dispositivos aprobados o administrados."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Azure Architecture and Services",
+      "subtopic": "Describe Azure identity, access, and security",
+      "text": "The letter R in RBAC stands for:",
+      "text_es": "La letra R en la palabra RBAC representa el significado de:",
+      "type": "single",
+      "answers": [
+        {
+          "text": "Rights",
+          "text_es": "Derechos",
+          "correct": false
+        },
+        {
+          "text": "Review",
+          "text_es": "Revisión",
+          "correct": false
+        },
+        {
+          "text": "Role",
+          "text_es": "Rol",
+          "correct": true
+        },
+        {
+          "text": "Rule",
+          "text_es": "Regla",
+          "correct": false
+        }
+      ],
+      "explanation": "RBAC stands for Role-Based Access Control, which provides fine-grained access management for Azure resources, granting users only the rights they need.",
+      "explanation_es": "RBAC significa Control de acceso basado en roles, que proporciona una administración de acceso específica para los recursos de Azure, concediendo a los usuarios solo los derechos que necesitan."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Azure Management and Governance",
+      "subtopic": "Describe features and tools in Azure for governance and compliance",
+      "text": "What is the data privacy and information protection regulation that came into effect across Europe in May 2018?",
+      "text_es": "¿Cuál es el reglamento de privacidad de datos y protección de la información que entró en vigor en toda Europa en mayo de 2018?",
+      "type": "single",
+      "answers": [
+        {
+          "text": "PCI DSS",
+          "text_es": "PCI DSS",
+          "correct": false
+        },
+        {
+          "text": "ISO",
+          "text_es": "ISO",
+          "correct": false
+        },
+        {
+          "text": "GDPR",
+          "text_es": "RGPD",
+          "correct": true
+        },
+        {
+          "text": "FedRAMP",
+          "text_es": "FedRAMP",
+          "correct": false
+        }
+      ],
+      "explanation": "The General Data Protection Regulation (GDPR) introduces rules for organizations that offer goods and services to people in the EU, or that collect and analyze data for EU residents.",
+      "explanation_es": "El Reglamento General de Protección de Datos (RGPD) introduce reglas para las organizaciones que ofrecen bienes y servicios a personas en la UE, o que recopilan y analizan datos para residentes de la UE."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Azure Management and Governance",
+      "subtopic": "Describe cost management in Azure",
+      "text": "Which system is used to determine Azure costs for each billing period?",
+      "text_es": "¿Cuál de los siguientes sistemas se usa para determinar los costos de Azure para cada período de facturación?",
+      "type": "single",
+      "answers": [
+        {
+          "text": "Azure Pricing Calculator",
+          "text_es": "La calculadora de precios de Azure",
+          "correct": false
+        },
+        {
+          "text": "The Azure website",
+          "text_es": "El sitio web de Azure",
+          "correct": false
+        },
+        {
+          "text": "Usage meters",
+          "text_es": "Medidores de uso",
+          "correct": true
+        },
+        {
+          "text": "Number of virtual machines created",
+          "text_es": "Número de máquinas virtuales creadas",
+          "correct": false
+        }
+      ],
+      "explanation": "Azure billing is based on consumption using monthly usage meters. Meters track resource usage over its lifetime and are used to calculate the bill.",
+      "explanation_es": "Azure se factura según el consumo en función de los medidores de uso mensuales. Los medidores rastrean el uso de un recurso a lo largo de su vida útil y se utilizan para calcular la factura."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Azure Management and Governance",
+      "subtopic": "Describe features and tools for managing and deploying Azure resources",
+      "text": "Azure services can go through several phases in a service lifecycle. What are the three phases called?",
+      "text_es": "Los servicios de Azure pueden pasar por varias fases en un ciclo de vida del servicio. ¿Cómo se llaman las tres fases?",
+      "type": "single",
+      "answers": [
+        {
+          "text": "Preview phase, General Availability phase, and Unpublished",
+          "text_es": "Fase de vista previa, fase de disponibilidad general y no publicado",
+          "correct": false
+        },
+        {
+          "text": "Private preview, Public preview, and General Availability",
+          "text_es": "Versión preliminar privada, versión preliminar pública y disponibilidad general",
+          "correct": true
+        },
+        {
+          "text": "Announced, Coming Soon, and Live",
+          "text_es": "Anunciado, próximamente y en vivo",
+          "correct": false
+        },
+        {
+          "text": "Development phase, QA phase, and Live phase",
+          "text_es": "Fase de desarrollo, fase de control de calidad y fase en vivo",
+          "correct": false
+        }
+      ],
+      "explanation": "Azure service lifecycle phases are: Private Preview (available to select customers), Public Preview (available to all for evaluation), and General Availability (released to all customers).",
+      "explanation_es": "Las fases del ciclo de vida del servicio de Azure son: Versión preliminar privada (disponible para clientes seleccionados), Versión preliminar pública (disponible para todos para evaluación) y Disponibilidad general (publicada para todos los clientes)."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Cloud Concepts",
+      "subtopic": "Describe cloud computing",
+      "text": "Which migration strategy moves an on-premises solution to Azure without modifications?",
+      "text_es": "¿Cuál es la estrategia de migración que mueve la solución local a Azure sin modificaciones?",
+      "type": "single",
+      "answers": [
+        {
+          "text": "Rebuild",
+          "text_es": "Reconstruir",
+          "correct": false
+        },
+        {
+          "text": "Rearchitect",
+          "text_es": "Rearquitectura",
+          "correct": false
+        },
+        {
+          "text": "No changes needed",
+          "text_es": "No se necesitan cambios",
+          "correct": false
+        },
+        {
+          "text": "Rehost / Lift and Shift",
+          "text_es": "Rehost / Lift and Shift",
+          "correct": true
+        }
+      ],
+      "explanation": "Moving applications from on-premises to the cloud without changes is referred to as Lift and Shift (Rehost). Azure allows you to migrate applications as-is with minimal impact and lower cost.",
+      "explanation_es": "Mover aplicaciones del entorno local a la nube sin cambios se refiere a Lift and Shift (Rehost). Azure permite migrar las aplicaciones tal cual, con un impacto mínimo y menor costo."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Cloud Concepts",
+      "subtopic": "Describe cloud computing",
+      "text": "You have an on-premises network with 100 servers. You need to recommend a solution that provides additional resources while minimizing capital and operational costs. What should you recommend?",
+      "text_es": "Tiene una red local que contiene 100 servidores. Debe recomendar una solución que proporcione recursos adicionales minimizando los costos. ¿Qué debe incluir en la recomendación?",
+      "type": "single",
+      "answers": [
+        {
+          "text": "Hybrid cloud",
+          "text_es": "Nube híbrida",
+          "correct": true
+        },
+        {
+          "text": "Private cloud",
+          "text_es": "Nube privada",
+          "correct": false
+        },
+        {
+          "text": "Full migration to public cloud",
+          "text_es": "Migración completa a la nube pública",
+          "correct": false
+        },
+        {
+          "text": "Additional datacenter",
+          "text_es": "Centro de datos adicional",
+          "correct": false
+        }
+      ],
+      "explanation": "The existing 100 servers can remain in the private cloud while new resources are hosted in the public cloud, reducing capital expenditure. This combination is a hybrid cloud model.",
+      "explanation_es": "Los 100 servidores existentes pueden permanecer en la nube privada y los nuevos recursos se pueden hospedar en la nube pública para reducir el gasto de capital. Esta combinación es un modelo de nube híbrida."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Azure Architecture and Services",
+      "subtopic": "Describe Azure compute services",
+      "text": "A company wants to host a Docker container-based solution. Which Azure service should be used to deploy and manage it?",
+      "text_es": "Una empresa quiere alojar una solución basada en contenedores de Docker. ¿Cuál de los siguientes servicios se puede utilizar para implementar y administrar la solución?",
+      "type": "single",
+      "answers": [
+        {
+          "text": "Azure App Service",
+          "text_es": "Servicio de aplicaciones de Azure",
+          "correct": false
+        },
+        {
+          "text": "Azure Data Lake Analytics",
+          "text_es": "Análisis de Azure Data Lake",
+          "correct": false
+        },
+        {
+          "text": "Azure Virtual Machine Scale Sets",
+          "text_es": "Conjuntos de escalado de máquinas virtuales de Azure",
+          "correct": false
+        },
+        {
+          "text": "Azure Kubernetes Service",
+          "text_es": "Azure Kubernetes",
+          "correct": true
+        }
+      ],
+      "explanation": "Azure Kubernetes Service (AKS) is a fully managed Kubernetes service that makes it easy to deploy and manage containerized applications.",
+      "explanation_es": "Azure Kubernetes Service (AKS) es un servicio de Kubernetes totalmente administrado que facilita la implementación y administración de aplicaciones en contenedores."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Azure Management and Governance",
+      "subtopic": "Describe features and tools in Azure for governance and compliance",
+      "text": "Your company plans to migrate all data to Azure. You need to identify if Azure meets regional compliance requirements. What should you use?",
+      "text_es": "Su empresa planea migrar todos sus datos a Azure. Debe identificar si Azure cumple con los requisitos regionales. ¿Qué debería usar?",
+      "type": "single",
+      "answers": [
+        {
+          "text": "Azure Portal",
+          "text_es": "Azure Portal",
+          "correct": false
+        },
+        {
+          "text": "Azure Security Center",
+          "text_es": "Centro de seguridad de Azure",
+          "correct": false
+        },
+        {
+          "text": "Azure Trust Center",
+          "text_es": "Centro de confianza de Azure",
+          "correct": true
+        },
+        {
+          "text": "Azure Marketplace",
+          "text_es": "Azure Marketplace",
+          "correct": false
+        }
+      ],
+      "explanation": "The Trust Center is a website resource containing information about how Microsoft implements and supports security, privacy, compliance, and transparency across its cloud products.",
+      "explanation_es": "El Centro de confianza es un recurso que contiene información sobre cómo Microsoft implementa y admite la seguridad, la privacidad, el cumplimiento y la transparencia en todos sus productos en la nube."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Azure Architecture and Services",
+      "subtopic": "Describe Azure compute services",
+      "text": "Your team has limited experience writing custom code but sees value in automating business processes. What is the best option?",
+      "text_es": "Su equipo tiene experiencia limitada en la escritura de código personalizado, pero ve un enorme valor en la automatización de procesos empresariales. ¿Cuál es la mejor opción?",
+      "type": "single",
+      "answers": [
+        {
+          "text": "Azure Functions",
+          "text_es": "Azure Functions",
+          "correct": false
+        },
+        {
+          "text": "Azure App Service",
+          "text_es": "Servicio de aplicaciones de Azure",
+          "correct": false
+        },
+        {
+          "text": "Azure Logic Apps",
+          "text_es": "Azure Logic Apps",
+          "correct": true
+        },
+        {
+          "text": "Azure Kubernetes Service",
+          "text_es": "Azure Kubernetes Service",
+          "correct": false
+        }
+      ],
+      "explanation": "Azure Logic Apps is best suited for users comfortable in a visual environment to automate business processes without extensive coding.",
+      "explanation_es": "Azure Logic Apps es más adecuado para usuarios que se sienten cómodos en un entorno visual para automatizar sus procesos empresariales sin necesidad de escribir código extenso."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Azure Architecture and Services",
+      "subtopic": "Describe Azure storage services",
+      "text": "You plan to create an Azure VM. Which storage service should be used to store the VM's data disks?",
+      "text_es": "Planea crear una máquina virtual de Azure. ¿Qué servicio de almacenamiento se debe usar para almacenar los discos de datos de la VM?",
+      "type": "single",
+      "answers": [
+        {
+          "text": "Queues",
+          "text_es": "Colas",
+          "correct": false
+        },
+        {
+          "text": "Blobs",
+          "text_es": "Blobs",
+          "correct": true
+        },
+        {
+          "text": "Files",
+          "text_es": "Archivos",
+          "correct": false
+        },
+        {
+          "text": "Tables",
+          "text_es": "Tablas",
+          "correct": false
+        }
+      ],
+      "explanation": "Page Blobs are the foundation of Azure IaaS disks. They are composed of 512-byte pages up to 8 TB in total size, designed for frequent random read/write operations.",
+      "explanation_es": "Los blobs en páginas son la base de los discos de IaaS de Azure. Están compuestos por páginas de 512 bytes de hasta 8 TB de tamaño total, diseñados para operaciones frecuentes de lectura/escritura aleatorias."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Azure Management and Governance",
+      "subtopic": "Describe monitoring tools in Azure",
+      "text": "Which feature collects all logs from multiple resources in a central dashboard where you can run queries, view graphs, and create alerts?",
+      "text_es": "¿Qué característica recopila todos los registros de varios recursos en un panel central, donde puede ejecutar consultas, ver gráficos y crear alertas?",
+      "type": "single",
+      "answers": [
+        {
+          "text": "Azure Security Center",
+          "text_es": "Centro de seguridad de Azure",
+          "correct": false
+        },
+        {
+          "text": "Azure Monitor",
+          "text_es": "Azure Monitor",
+          "correct": true
+        },
+        {
+          "text": "Event Hub",
+          "text_es": "Centro de eventos",
+          "correct": false
+        },
+        {
+          "text": "Azure Portal Dashboard",
+          "text_es": "Panel de Azure Portal",
+          "correct": false
+        }
+      ],
+      "explanation": "Azure Monitor maximizes application availability and performance by delivering a comprehensive solution for collecting, analyzing, and acting on telemetry from cloud and on-premises environments.",
+      "explanation_es": "Azure Monitor maximiza la disponibilidad y el rendimiento de las aplicaciones mediante una solución completa para recopilar, analizar y actuar sobre la telemetría desde la nube y los entornos locales."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Azure Architecture and Services",
+      "subtopic": "Describe Azure compute services",
+      "text": "Which service could help you manage the VMs that developers and testers need to ensure a new application works across multiple operating systems?",
+      "text_es": "¿Qué servicio podría ayudarlo a administrar las máquinas virtuales que sus desarrolladores y evaluadores necesitan para asegurarse de que su nueva aplicación funcione en varios sistemas operativos?",
+      "type": "single",
+      "answers": [
+        {
+          "text": "Azure Test Labs",
+          "text_es": "Azure Test Labs",
+          "correct": false
+        },
+        {
+          "text": "Azure Repos",
+          "text_es": "Azure Repos",
+          "correct": false
+        },
+        {
+          "text": "Azure DevTest Labs",
+          "text_es": "Azure DevTest Labs",
+          "correct": true
+        }
+      ],
+      "explanation": "Azure DevTest Labs is used to manage VMs for testing, including automatic configuration, provisioning, and deprovisioning.",
+      "explanation_es": "Azure DevTest Labs se usa para administrar máquinas virtuales para pruebas, incluida la configuración, el aprovisionamiento y el desaprovisionamiento automático."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Azure Architecture and Services",
+      "subtopic": "Describe Azure networking services",
+      "text": "Your company plans to move servers to Azure. A compliance policy states that 'specialServer' must be in a separate network segment. What solution should you recommend?",
+      "text_es": "Su empresa planea mover servidores a Azure. La política de cumplimiento establece que un servidor llamado specialServer debe estar en un segmento de red independiente. ¿Qué solución debería recomendar?",
+      "type": "single",
+      "answers": [
+        {
+          "text": "A VPN gateway for specialServer and a virtual network gateway for each server",
+          "text_es": "Una puerta de enlace VPN para specialServer y una puerta de enlace de red virtual para cada servidor",
+          "correct": false
+        },
+        {
+          "text": "A resource group for all servers and a resource lock for specialServer",
+          "text_es": "Un grupo de recursos para todos los servidores y un bloqueo de recursos para specialServer",
+          "correct": false
+        },
+        {
+          "text": "A virtual network for specialServer and another virtual network for all other servers",
+          "text_es": "Una red virtual para specialServer y otra red virtual para todos los demás servidores",
+          "correct": true
+        },
+        {
+          "text": "A resource group for specialServer and another resource group for all other servers",
+          "text_es": "Un grupo de recursos para specialServer y otro para todos los demás servidores",
+          "correct": false
+        }
+      ],
+      "explanation": "Using two virtual networks ensures that servers in one VNet cannot connect to specialServer in another VNet, providing network isolation.",
+      "explanation_es": "El uso de dos redes virtuales garantiza que los servidores de una red virtual no puedan conectarse a specialServer en otra red virtual, proporcionando aislamiento de red."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Azure Architecture and Services",
+      "subtopic": "Describe the core architectural components of Azure",
+      "text": "An Azure Availability Zone can be used to protect against [an Azure datacenter failure]. Is this statement correct?",
+      "text_es": "Se puede usar una zona de disponibilidad de Azure para protegerse de [un error del centro de datos de Azure]. ¿Es correcta esta afirmación?",
+      "type": "single",
+      "answers": [
+        {
+          "text": "A physical server failure",
+          "text_es": "Un error del servidor físico",
+          "correct": false
+        },
+        {
+          "text": "A storage failure",
+          "text_es": "Un error de almacenamiento",
+          "correct": false
+        },
+        {
+          "text": "An Azure region failure",
+          "text_es": "Un error de región de Azure",
+          "correct": false
+        },
+        {
+          "text": "No change needed (the statement is correct)",
+          "text_es": "No se necesitan cambios (la afirmación es correcta)",
+          "correct": true
+        }
+      ],
+      "explanation": "Availability Zones are physically independent locations (datacenters) within an Azure region. If one zone fails, other availability zones in the region continue working.",
+      "explanation_es": "Las zonas de disponibilidad son ubicaciones físicamente independientes (centros de datos) dentro de una región de Azure. Si una zona falla, otras zonas de disponibilidad de la región seguirán funcionando."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Azure Architecture and Services",
+      "subtopic": "Describe the core architectural components of Azure",
+      "text": "As a best practice, all resources that are part of an application and share the same lifecycle should exist in the same [Resource Group]. Is this statement correct?",
+      "text_es": "Como práctica recomendada, todos los recursos que forman parte de una aplicación y comparten el mismo ciclo de vida deben existir en el mismo [Grupo de recursos]. ¿Es correcta esta afirmación?",
+      "type": "single",
+      "answers": [
+        {
+          "text": "Management Group",
+          "text_es": "Grupo de gestión",
+          "correct": false
+        },
+        {
+          "text": "Availability Set",
+          "text_es": "Conjunto de disponibilidad",
+          "correct": false
+        },
+        {
+          "text": "No change needed (the statement is correct)",
+          "text_es": "No se necesitan cambios (la afirmación es correcta)",
+          "correct": true
+        },
+        {
+          "text": "Region",
+          "text_es": "Región",
+          "correct": false
+        }
+      ],
+      "explanation": "Resource groups allow you to logically group Azure resources and manage the application collectively during its lifecycle.",
+      "explanation_es": "Los grupos de recursos permiten agrupar lógicamente los recursos de Azure y administrar la aplicación colectivamente durante su ciclo de vida."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Azure Architecture and Services",
+      "subtopic": "Describe Azure compute services",
+      "text": "Which of the following lists compute options in order from most control to least control?",
+      "text_es": "¿Cuál de las siguientes opciones enumera las opciones de cómputo en orden de mayor a menor control?",
+      "type": "single",
+      "answers": [
+        {
+          "text": "Virtual Machines > Containers > Serverless",
+          "text_es": "Máquinas virtuales > Contenedores > Informática sin servidor",
+          "correct": true
+        },
+        {
+          "text": "Containers > Serverless > Virtual Machines",
+          "text_es": "Contenedores > Informática sin servidor > Máquinas virtuales",
+          "correct": false
+        },
+        {
+          "text": "All have the same level of control",
+          "text_es": "Todos tienen el mismo nivel de control",
+          "correct": false
+        },
+        {
+          "text": "Serverless > Containers > Virtual Machines",
+          "text_es": "Informática sin servidor > Contenedores > Máquinas virtuales",
+          "correct": false
+        }
+      ],
+      "explanation": "VMs provide the most control (you manage the OS and software), containers provide less control (you manage the app and dependencies), and serverless provides the least control (you only manage the code).",
+      "explanation_es": "Las VMs proporcionan el mayor control (gestionas el SO y software), los contenedores proporcionan menos control (gestionas la app y dependencias), y serverless el menor control (solo gestionas el código)."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Azure Architecture and Services",
+      "subtopic": "Describe Azure networking services",
+      "text": "You plan to deploy a static website with large video files accessed by users worldwide. Which Azure feature should you recommend for the best video playback experience?",
+      "text_es": "Planea implementar un sitio web estático con archivos de video grandes accedido por usuarios de todo el mundo. ¿Qué característica de Azure debería recomendar para la mejor experiencia de reproducción de video?",
+      "type": "single",
+      "answers": [
+        {
+          "text": "Network interface",
+          "text_es": "Interfaz de red",
+          "correct": false
+        },
+        {
+          "text": "Azure Traffic Manager",
+          "text_es": "Administrador de tráfico de Azure",
+          "correct": false
+        },
+        {
+          "text": "Application Gateway",
+          "text_es": "Puerta de enlace de aplicaciones",
+          "correct": false
+        },
+        {
+          "text": "Azure Content Delivery Network (CDN)",
+          "text_es": "Red de entrega de contenido (CDN) de Azure",
+          "correct": true
+        }
+      ],
+      "explanation": "CDN caches video files at edge locations and serves them to users from their local region to minimize latency, providing the best playback experience.",
+      "explanation_es": "CDN almacena archivos de video en caché en ubicaciones perimetrales y los sirve a los usuarios desde su región local para minimizar la latencia, proporcionando la mejor experiencia de reproducción."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Azure Architecture and Services",
+      "subtopic": "Describe Azure storage services",
+      "text": "You plan to map a network drive from multiple Windows 10 computers to Azure Storage. What should you create?",
+      "text_es": "Planea asignar una unidad de red de varios equipos con Windows 10 a Azure Storage. ¿Qué debería crear?",
+      "type": "single",
+      "answers": [
+        {
+          "text": "Blob service in a storage account",
+          "text_es": "Servicio Blobs en una cuenta de almacenamiento",
+          "correct": false
+        },
+        {
+          "text": "Azure SQL Database",
+          "text_es": "Base de datos SQL de Azure",
+          "correct": false
+        },
+        {
+          "text": "Virtual machine data disk",
+          "text_es": "Disco de datos de máquina virtual",
+          "correct": false
+        },
+        {
+          "text": "File service in a storage account",
+          "text_es": "Servicio de archivos en una cuenta de almacenamiento",
+          "correct": true
+        }
+      ],
+      "explanation": "Azure Files enables highly available network file shares that can be accessed using the standard Server Message Block (SMB) protocol, allowing multiple machines to share the same files.",
+      "explanation_es": "Azure Files permite configurar recursos compartidos de archivos de red de alta disponibilidad accesibles mediante el protocolo estándar SMB, permitiendo que múltiples máquinas compartan los mismos archivos."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Azure Architecture and Services",
+      "subtopic": "Describe Azure identity, access, and security",
+      "text": "How can the IT department use biometric properties, such as facial recognition, to allow delivery drivers to prove their identities?",
+      "text_es": "¿Cómo puede el departamento de TI utilizar propiedades biométricas, como el reconocimiento facial, para permitir que los repartidores demuestren sus identidades?",
+      "type": "single",
+      "answers": [
+        {
+          "text": "SSO",
+          "text_es": "SSO",
+          "correct": false
+        },
+        {
+          "text": "Azure Policy",
+          "text_es": "Azure Policy",
+          "correct": false
+        },
+        {
+          "text": "Multi-factor authentication",
+          "text_es": "Autenticación multifactor",
+          "correct": true
+        },
+        {
+          "text": "Conditional Access",
+          "text_es": "Acceso condicional",
+          "correct": false
+        }
+      ],
+      "explanation": "Multi-factor authentication can include something you know (password), something you have (phone), and something you are (biometrics like facial recognition).",
+      "explanation_es": "La autenticación multifactor puede incluir algo que sabes (contraseña), algo que tienes (teléfono) y algo que eres (biométricos como reconocimiento facial)."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Azure Architecture and Services",
+      "subtopic": "Describe the core architectural components of Azure",
+      "text": "Your company plans to migrate all network resources to Azure. What should you create first?",
+      "text_es": "Su empresa planea migrar todos sus recursos de red a Azure. ¿Qué debería crear primero?",
+      "type": "single",
+      "answers": [
+        {
+          "text": "Subscription",
+          "text_es": "Suscripción",
+          "correct": true
+        },
+        {
+          "text": "Resource group",
+          "text_es": "Grupo de recursos",
+          "correct": false
+        },
+        {
+          "text": "Virtual network",
+          "text_es": "Red virtual",
+          "correct": false
+        },
+        {
+          "text": "Management group",
+          "text_es": "Grupo de gestión",
+          "correct": false
+        }
+      ],
+      "explanation": "When you sign up for Azure, you create at least one subscription. All deployed resources must be associated with a subscription for billing.",
+      "explanation_es": "Cuando se registra para usar Azure, crea al menos una suscripción. Todos los recursos que se implementan deben estar asociados a una suscripción para la facturación."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Azure Management and Governance",
+      "subtopic": "Describe features and tools for managing and deploying Azure resources",
+      "text": "A support engineer plans to perform Azure administration tasks using Azure PowerShell. Which three tools should they use? (Select three)",
+      "text_es": "Un ingeniero de soporte planea realizar tareas de administración de Azure mediante Azure PowerShell. ¿Qué tres herramientas debe usar? (Seleccione tres)",
+      "type": "multi",
+      "answers": [
+        {
+          "text": "Windows PowerShell",
+          "text_es": "Windows PowerShell",
+          "correct": true
+        },
+        {
+          "text": "PowerShell in Azure Cloud Shell",
+          "text_es": "PowerShell en Azure Cloud Shell",
+          "correct": true
+        },
+        {
+          "text": "macOS PowerShell Core",
+          "text_es": "macOS PowerShell Core",
+          "correct": true
+        },
+        {
+          "text": "macOS PowerShell",
+          "text_es": "macOS PowerShell",
+          "correct": false
+        },
+        {
+          "text": "Azure Resource Explorer",
+          "text_es": "Explorador de recursos de Azure",
+          "correct": false
+        }
+      ],
+      "explanation": "Azure PowerShell can be run in Windows PowerShell, Azure Cloud Shell (browser-based), and macOS PowerShell Core (cross-platform version).",
+      "explanation_es": "Azure PowerShell se puede ejecutar en Windows PowerShell, Azure Cloud Shell (basado en explorador) y macOS PowerShell Core (versión multiplataforma)."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Azure Management and Governance",
+      "subtopic": "Describe features and tools in Azure for governance and compliance",
+      "text": "A company wants a declarative way to orchestrate the deployment of resource types, role assignments, and policy assignments. They decide to use Azure Blueprints. Would this meet the requirement?",
+      "text_es": "Una empresa quiere una manera declarativa de orquestar la implementación de varios tipos de recursos, asignaciones de roles y asignaciones de directivas. Deciden usar Azure Blueprints. ¿Cumpliría esto con el requisito?",
+      "type": "single",
+      "answers": [
+        {
+          "text": "No",
+          "text_es": "No",
+          "correct": false
+        },
+        {
+          "text": "Yes",
+          "text_es": "Sí",
+          "correct": true
+        }
+      ],
+      "explanation": "Azure Blueprints provides a declarative way to orchestrate the deployment of various resource templates and artifacts, including role assignments and policy assignments.",
+      "explanation_es": "Azure Blueprints proporciona una manera declarativa de orquestar la implementación de varias plantillas de recursos y artefactos, incluidas asignaciones de roles y asignaciones de directivas."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Cloud Concepts",
+      "subtopic": "Describe cloud service types",
+      "text": "A company plans to create several SQL databases in Azure using Azure SQL Database. What is the correct service category?",
+      "text_es": "Una empresa tiene previsto crear varias bases de datos SQL en Azure utilizando Azure SQL Database. ¿Cuál es la categoría correcta del servicio?",
+      "type": "single",
+      "answers": [
+        {
+          "text": "Infrastructure as a Service (IaaS)",
+          "text_es": "Infraestructura como servicio (IaaS)",
+          "correct": false
+        },
+        {
+          "text": "Platform as a Service (PaaS)",
+          "text_es": "Plataforma como servicio (PaaS)",
+          "correct": true
+        },
+        {
+          "text": "Software as a Service (SaaS)",
+          "text_es": "Software como servicio (SaaS)",
+          "correct": false
+        },
+        {
+          "text": "Function as a Service (FaaS)",
+          "text_es": "Función como servicio (FaaS)",
+          "correct": false
+        }
+      ],
+      "explanation": "Azure SQL Database is a PaaS service. Microsoft manages the underlying infrastructure, OS, and database engine, while you manage the data and access.",
+      "explanation_es": "Azure SQL Database es un servicio PaaS. Microsoft gestiona la infraestructura subyacente, el SO y el motor de base de datos, mientras que tú gestionas los datos y el acceso."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Cloud Concepts",
+      "subtopic": "Describe cloud service types",
+      "text": "A company plans to create several virtual machines in Azure. What is the correct service category for Azure Virtual Machines?",
+      "text_es": "Una empresa tiene previsto crear varias máquinas virtuales en Azure. ¿Cuál es la categoría correcta del servicio Azure Virtual Machine?",
+      "type": "single",
+      "answers": [
+        {
+          "text": "Infrastructure as a Service (IaaS)",
+          "text_es": "Infraestructura como servicio (IaaS)",
+          "correct": true
+        },
+        {
+          "text": "Platform as a Service (PaaS)",
+          "text_es": "Plataforma como servicio (PaaS)",
+          "correct": false
+        },
+        {
+          "text": "Software as a Service (SaaS)",
+          "text_es": "Software como servicio (SaaS)",
+          "correct": false
+        },
+        {
+          "text": "Function as a Service (FaaS)",
+          "text_es": "Función como servicio (FaaS)",
+          "correct": false
+        }
+      ],
+      "explanation": "Azure Virtual Machines is an IaaS service. You manage the operating system, configuration, and applications while Azure manages the physical hardware.",
+      "explanation_es": "Azure Virtual Machines es un servicio IaaS. Tú gestionas el sistema operativo, la configuración y las aplicaciones mientras Azure gestiona el hardware físico."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Cloud Concepts",
+      "subtopic": "Describe cloud computing",
+      "text": "What is an advantage of creating a private cloud network?",
+      "text_es": "¿Cuál de las siguientes opciones es una ventaja de crear una red de nube privada?",
+      "type": "single",
+      "answers": [
+        {
+          "text": "A private cloud can only support an IaaS model",
+          "text_es": "Un entorno de nube privada solo puede admitir un modelo IaaS",
+          "correct": false
+        },
+        {
+          "text": "A private cloud can only support a PaaS model",
+          "text_es": "Un entorno de nube privada solo puede admitir un modelo PaaS",
+          "correct": false
+        },
+        {
+          "text": "The private cloud can be deployed for the general public",
+          "text_es": "El entorno de nube privada se puede implementar para el público en general",
+          "correct": false
+        },
+        {
+          "text": "The private cloud can be deployed for selected users",
+          "text_es": "El entorno de nube privada se puede implementar para usuarios seleccionados",
+          "correct": true
+        }
+      ],
+      "explanation": "A private cloud is deployed for selected users within an organization, not the general public. It provides more control and security over data and applications.",
+      "explanation_es": "Una nube privada se implementa para usuarios seleccionados dentro de una organización, no para el público en general. Proporciona más control y seguridad sobre datos y aplicaciones."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Cloud Concepts",
+      "subtopic": "Describe the benefits of using cloud services",
+      "text": "Your company plans to migrate several servers to Azure VMs. Which two administrative responsibilities will be reduced after migration? (Select two)",
+      "text_es": "Tu empresa planea migrar varios servidores a máquinas virtuales de Azure. ¿Cuáles dos responsabilidades administrativas se reducirán después de la migración? (Selecciona dos)",
+      "type": "multi",
+      "answers": [
+        {
+          "text": "Replacing failed server hardware",
+          "text_es": "Reemplazar el hardware de servidor fallido",
+          "correct": true
+        },
+        {
+          "text": "Managing permissions for shared documents",
+          "text_es": "Administrar permisos para documentos compartidos",
+          "correct": false
+        },
+        {
+          "text": "Updating server operating systems",
+          "text_es": "Actualizar los sistemas operativos del servidor",
+          "correct": false
+        },
+        {
+          "text": "Backing up application data",
+          "text_es": "Respaldar los datos de la aplicación",
+          "correct": false
+        },
+        {
+          "text": "Managing physical server security",
+          "text_es": "Administrar la seguridad física del servidor",
+          "correct": true
+        }
+      ],
+      "explanation": "When migrating to Azure VMs, Microsoft handles the physical hardware (replacing failed components) and physical security of datacenters. You still manage OS updates, permissions, and backups.",
+      "explanation_es": "Al migrar a VMs de Azure, Microsoft se encarga del hardware físico (reemplazo de componentes fallidos) y la seguridad física de los centros de datos. Tú sigues gestionando actualizaciones de SO, permisos y respaldos."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Azure Management and Governance",
+      "subtopic": "Describe features and tools in Azure for governance and compliance",
+      "text": "What provides organizations the ability to manage compliance of Azure resources across multiple subscriptions?",
+      "text_es": "¿Qué proporciona a las organizaciones la capacidad de gestionar el cumplimiento de los recursos de Azure en varias suscripciones?",
+      "type": "single",
+      "answers": [
+        {
+          "text": "Management groups",
+          "text_es": "Grupos de administración (Management groups)",
+          "correct": true
+        },
+        {
+          "text": "Resource groups",
+          "text_es": "Grupos de recursos (Resource groups)",
+          "correct": false
+        },
+        {
+          "text": "Azure policies",
+          "text_es": "Políticas de Azure (Azure policies)",
+          "correct": false
+        },
+        {
+          "text": "Azure App Service",
+          "text_es": "Servicio de aplicaciones de Azure (Azure App Service)",
+          "correct": false
+        }
+      ],
+      "explanation": "Management groups provide a level of scope above subscriptions, allowing you to organize subscriptions and apply governance controls like policies across multiple subscriptions.",
+      "explanation_es": "Los grupos de administración proporcionan un nivel de ámbito por encima de las suscripciones, permitiendo organizar suscripciones y aplicar controles de gobernanza como políticas en varias suscripciones."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Azure Architecture and Services",
+      "subtopic": "Describe the core architectural components of Azure",
+      "text": "Which of the following is a logical unit of Azure services that is linked to an Azure account?",
+      "text_es": "¿Cuál de las siguientes es una unidad lógica de los servicios de Azure que se vincula a una cuenta de Azure?",
+      "type": "single",
+      "answers": [
+        {
+          "text": "Virtual Network",
+          "text_es": "Red virtual (Virtual Network)",
+          "correct": false
+        },
+        {
+          "text": "Resource Group",
+          "text_es": "Grupo de recursos (Resource Group)",
+          "correct": false
+        },
+        {
+          "text": "Azure Subscription",
+          "text_es": "Suscripción de Azure (Azure Subscription)",
+          "correct": true
+        },
+        {
+          "text": "Management Group",
+          "text_es": "Grupo de administración (Management Group)",
+          "correct": false
+        }
+      ],
+      "explanation": "An Azure subscription is a logical unit that links Azure services to an Azure account. It defines billing boundaries and access control boundaries.",
+      "explanation_es": "Una suscripción de Azure es una unidad lógica que vincula los servicios de Azure a una cuenta. Define los límites de facturación y los límites de control de acceso."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Azure Management and Governance",
+      "subtopic": "Describe features and tools for managing and deploying Azure resources",
+      "text": "The graphical user interface (GUI) used to manage Azure resources is _____",
+      "text_es": "La interfaz gráfica de usuario (GUI) utilizada para administrar los recursos de Azure es _____",
+      "type": "single",
+      "answers": [
+        {
+          "text": "Remote Desktop Protocol (RDP)",
+          "text_es": "Protocolo de escritorio remoto (RDP)",
+          "correct": false
+        },
+        {
+          "text": "PowerShell",
+          "text_es": "PowerShell",
+          "correct": false
+        },
+        {
+          "text": "Azure Storage Explorer",
+          "text_es": "Explorador de almacenamiento de Azure",
+          "correct": false
+        },
+        {
+          "text": "Azure Portal",
+          "text_es": "Portal de Azure (Azure Portal)",
+          "correct": true
+        }
+      ],
+      "explanation": "Azure Portal is the web-based GUI used to manage Azure resources. It provides a unified console for creating, managing, and monitoring Azure services.",
+      "explanation_es": "Azure Portal es la GUI basada en web utilizada para administrar los recursos de Azure. Proporciona una consola unificada para crear, gestionar y supervisar los servicios de Azure."
+    },
+    {
+      "certId": "az900",
+      "topic": "Describe Azure Architecture and Services",
+      "subtopic": "Describe Azure compute services",
+      "text": "Which Azure compute resource can be used to deploy and manage a set of identical virtual machines?",
+      "text_es": "¿Qué recurso de cómputo de Azure se puede usar para implementar y administrar un conjunto de máquinas virtuales idénticas?",
+      "type": "single",
+      "answers": [
+        {
+          "text": "Azure Resource Manager",
+          "text_es": "Administrador de recursos de Azure (Azure Resource Manager)",
+          "correct": false
+        },
+        {
+          "text": "Virtual Machine Availability Zones",
+          "text_es": "Zonas de disponibilidad de máquinas virtuales",
+          "correct": false
+        },
+        {
+          "text": "Virtual Machine Scale Sets",
+          "text_es": "Conjuntos de escalado de máquinas virtuales (VM Scale Sets)",
+          "correct": true
+        },
+        {
+          "text": "Virtual Machine Availability Sets",
+          "text_es": "Conjuntos de disponibilidad de máquinas virtuales",
+          "correct": false
+        }
+      ],
+      "explanation": "Virtual Machine Scale Sets let you create and manage a group of identical, load-balanced VMs. The number of VM instances can automatically increase or decrease in response to demand.",
+      "explanation_es": "Los Conjuntos de escalado de máquinas virtuales permiten crear y administrar un grupo de VMs idénticas con equilibrio de carga. El número de instancias puede aumentar o disminuir automáticamente en respuesta a la demanda."
+    }
+  ]
+}
