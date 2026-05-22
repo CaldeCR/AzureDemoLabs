@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure Certification Quiz</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <i class="fas fa-cloud"></i>
+            <span data-i18n="appTitle">Azure Certification Quiz</span>
+        </div>
+        <div class="navbar-controls">
+            <select id="certificationSelector" class="cert-selector">
+                <option value="">-- Select Certification --</option>
+            </select>
+            <div class="navbar-buttons">
+                <button id="btnLanguage" class="btn-icon" title="Toggle Language">
+                    <span id="langLabel">EN</span>
+                </button>
+                <button id="btnTheme" class="btn-icon" title="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar Navigation -->
+    <div class="layout">
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-view="dashboard">
+                    <i class="fas fa-home"></i>
+                    <span data-i18n="navDashboard">Dashboard</span>
+                </button>
+                <button class="nav-item" data-view="certifications">
+                    <i class="fas fa-certificate"></i>
+                    <span data-i18n="navCertifications">Certifications</span>
+                </button>
+                <button class="nav-item" data-view="questions">
+                    <i class="fas fa-database"></i>
+                    <span data-i18n="navQuestions">Question Bank</span>
+                </button>
+                <button class="nav-item" data-view="test-setup">
+                    <i class="fas fa-play-circle"></i>
+                    <span data-i18n="navStartTest">Start Test</span>
+                </button>
+                <button class="nav-item" data-view="progress">
+                    <i class="fas fa-chart-bar"></i>
+                    <span data-i18n="navProgress">Progress</span>
+                </button>
+                <button class="nav-item" data-view="import-export">
+                    <i class="fas fa-file-import"></i>
+                    <span data-i18n="navImportExport">Import / Export</span>
+                </button>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Dashboard View -->
+            <section id="view-dashboard" class="view active">
+                <h2 data-i18n="dashTitle">Dashboard</h2>
+                <div id="dashboardContent" class="dashboard-grid">
+                    <div class="dash-card">
+                        <div class="dash-card-icon"><i class="fas fa-certificate"></i></div>
+                        <div class="dash-card-info">
+                            <span class="dash-card-value" id="statCertCount">0</span>
+                            <span class="dash-card-label" data-i18n="statCertifications">Certifications</span>
+                        </div>
+                    </div>
+                    <div class="dash-card">
+                        <div class="dash-card-icon"><i class="fas fa-question-circle"></i></div>
+                        <div class="dash-card-info">
+                            <span class="dash-card-value" id="statQuestionCount">0</span>
+                            <span class="dash-card-label" data-i18n="statQuestions">Total Questions</span>
+                        </div>
+                    </div>
+                    <div class="dash-card">
+                        <div class="dash-card-icon"><i class="fas fa-clipboard-check"></i></div>
+                        <div class="dash-card-info">
+                            <span class="dash-card-value" id="statTestsTaken">0</span>
+                            <span class="dash-card-label" data-i18n="statTests">Tests Taken</span>
+                        </div>
+                    </div>
+                    <div class="dash-card">
+                        <div class="dash-card-icon"><i class="fas fa-percentage"></i></div>
+                        <div class="dash-card-info">
+                            <span class="dash-card-value" id="statAvgScore">0%</span>
+                            <span class="dash-card-label" data-i18n="statAvgScore">Avg. Score</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="dashboardCertInfo" class="cert-info-panel" style="display:none;">
+                    <h3 id="dashCertName"></h3>
+                    <p id="dashCertDesc"></p>
+                    <a id="dashCertLink" href="#" target="_blank" data-i18n="viewOfficialDocs">View Official Documentation</a>
+                    <div id="dashTopicsSummary" class="topics-summary"></div>
+                </div>
+            </section>
+
+            <!-- Certifications Manager View -->
+            <section id="view-certifications" class="view">
+                <div class="view-header">
+                    <h2 data-i18n="certTitle">Certifications Manager</h2>
+                    <button id="btnAddCert" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> <span data-i18n="addCertification">Add Certification</span>
+                    </button>
+                </div>
+                <div id="certList" class="cert-list"></div>
+
+                <!-- Certification Form Modal -->
+                <div id="certModal" class="modal" style="display:none;">
+                    <div class="modal-content modal-large">
+                        <div class="modal-header">
+                            <h3 id="certModalTitle" data-i18n="addCertification">Add Certification</h3>
+                            <button class="btn-close" id="btnCloseCertModal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label data-i18n="certCode">Code</label>
+                                <input type="text" id="certCode" placeholder="e.g. AZ-900" maxlength="20">
+                            </div>
+                            <div class="form-group">
+                                <label data-i18n="certName">Name</label>
+                                <input type="text" id="certName" placeholder="e.g. Azure Fundamentals">
+                            </div>
+                            <div class="form-group">
+                                <label data-i18n="certDescription">Description</label>
+                                <textarea id="certDescription" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label data-i18n="certLink">Official Documentation Link</label>
+                                <input type="url" id="certLink" placeholder="https://...">
+                            </div>
+                            <div class="form-group">
+                                <label data-i18n="certTopics">Topics</label>
+                                <div id="topicsEditor" class="topics-editor"></div>
+                                <button id="btnAddTopic" class="btn btn-secondary btn-sm">
+                                    <i class="fas fa-plus"></i> <span data-i18n="addTopic">Add Topic</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="btnSaveCert" class="btn btn-primary" data-i18n="save">Save</button>
+                            <button id="btnCancelCert" class="btn btn-secondary" data-i18n="cancel">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Question Bank View -->
+            <section id="view-questions" class="view">
+                <div class="view-header">
+                    <h2 data-i18n="questionsTitle">Question Bank</h2>
+                    <div class="view-header-actions">
+                        <button id="btnAddQuestion" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> <span data-i18n="addQuestion">Add Question</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="filters-bar">
+                    <select id="filterTopic" class="filter-select">
+                        <option value="" data-i18n="allTopics">All Topics</option>
+                    </select>
+                    <select id="filterSubtopic" class="filter-select">
+                        <option value="" data-i18n="allSubtopics">All Subtopics</option>
+                    </select>
+                    <input type="text" id="filterSearch" class="filter-search" data-i18n-placeholder="searchQuestions" placeholder="Search questions...">
+                    <select id="filterBookmarked" class="filter-select">
+                        <option value="" data-i18n="allQuestions">All Questions</option>
+                        <option value="bookmarked" data-i18n="bookmarkedOnly">Bookmarked Only</option>
+                    </select>
+                </div>
+                <div id="questionsList" class="questions-list"></div>
+
+                <!-- Question Form Modal -->
+                <div id="questionModal" class="modal" style="display:none;">
+                    <div class="modal-content modal-large">
+                        <div class="modal-header">
+                            <h3 id="questionModalTitle" data-i18n="addQuestion">Add Question</h3>
+                            <button class="btn-close" id="btnCloseQuestionModal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-row">
+                                <div class="form-group flex-1">
+                                    <label data-i18n="topic">Topic</label>
+                                    <select id="questionTopic"></select>
+                                </div>
+                                <div class="form-group flex-1">
+                                    <label data-i18n="subtopic">Subtopic</label>
+                                    <select id="questionSubtopic"></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label data-i18n="questionText">Question</label>
+                                <textarea id="questionText" rows="3" placeholder="Question text (English)"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Pregunta (Español)</label>
+                                <textarea id="questionText_es" rows="3" placeholder="Texto de la pregunta en español (opcional)"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label data-i18n="questionType">Type</label>
+                                <select id="questionType">
+                                    <option value="single" data-i18n="singleAnswer">Single Answer</option>
+                                    <option value="multi" data-i18n="multiAnswer">Multiple Answers</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label data-i18n="answers">Answers</label>
+                                <div id="answersEditor" class="answers-editor"></div>
+                                <button id="btnAddAnswer" class="btn btn-secondary btn-sm">
+                                    <i class="fas fa-plus"></i> <span data-i18n="addAnswer">Add Answer</span>
+                                </button>
+                            </div>
+                            <div class="form-group">
+                                <label data-i18n="explanation">Explanation</label>
+                                <textarea id="questionExplanation" rows="2" data-i18n-placeholder="explanationPlaceholder" placeholder="Explain why the correct answer is right..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Explicación (Español)</label>
+                                <textarea id="questionExplanation_es" rows="2" placeholder="Explicación en español (opcional)..."></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="btnSaveQuestion" class="btn btn-primary" data-i18n="save">Save</button>
+                            <button id="btnCancelQuestion" class="btn btn-secondary" data-i18n="cancel">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Test Setup View -->
+            <section id="view-test-setup" class="view">
+                <h2 data-i18n="testSetupTitle">Configure Your Test</h2>
+                <div class="test-setup-form">
+                    <div class="form-group">
+                        <label data-i18n="testMode">Test Mode</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="testMode" value="topic" checked>
+                                <span data-i18n="byTopic">By Topic</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="testMode" value="subtopic">
+                                <span data-i18n="bySubtopic">By Subtopic</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="testMode" value="general">
+                                <span data-i18n="generalTest">General (All Topics)</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group" id="topicSelectGroup">
+                        <label data-i18n="selectTopic">Select Topic</label>
+                        <select id="testTopic" class="filter-select"></select>
+                    </div>
+                    <div class="form-group" id="subtopicSelectGroup" style="display:none;">
+                        <label data-i18n="selectSubtopic">Select Subtopic</label>
+                        <select id="testSubtopic" class="filter-select"></select>
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n="numberOfQuestions">Number of Questions</label>
+                        <div class="range-group">
+                            <input type="range" id="testQuestionCount" min="5" max="60" value="20">
+                            <span id="testQuestionCountLabel">20</span>
+                        </div>
+                        <small id="availableQuestions" class="text-muted"></small>
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n="timer">Timer</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="timerMode" value="none" checked>
+                                <span data-i18n="noTimer">No Timer</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="timerMode" value="custom">
+                                <span data-i18n="customTimer">Custom Timer</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="timerMode" value="exam">
+                                <span data-i18n="examSimulation">Exam Simulation (85 min)</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group" id="customTimerGroup" style="display:none;">
+                        <label data-i18n="timerMinutes">Minutes</label>
+                        <input type="number" id="customTimerMinutes" min="1" max="300" value="30">
+                    </div>
+                    <button id="btnStartTest" class="btn btn-primary btn-large">
+                        <i class="fas fa-play"></i> <span data-i18n="startTest">Start Test</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Active Test View -->
+            <section id="view-test" class="view">
+                <div class="test-header">
+                    <div class="test-progress">
+                        <span id="testProgressText">1 / 20</span>
+                        <div class="progress-bar">
+                            <div id="testProgressBar" class="progress-fill" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div id="testTimer" class="test-timer" style="display:none;">
+                        <i class="fas fa-clock"></i> <span id="timerDisplay">00:00</span>
+                    </div>
+                    <button id="btnFlagQuestion" class="btn-icon" title="Bookmark">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <div id="testQuestionArea" class="test-question-area">
+                    <div class="question-topic-badge" id="testQuestionTopic"></div>
+                    <h3 id="testQuestionText" class="question-text"></h3>
+                    <p id="testQuestionHint" class="question-hint" style="display:none;"></p>
+                    <div id="testAnswerOptions" class="answer-options"></div>
+                </div>
+                <div id="testExplanation" class="test-explanation" style="display:none;">
+                    <div class="explanation-header">
+                        <i class="fas fa-lightbulb"></i> <span data-i18n="explanation">Explanation</span>
+                    </div>
+                    <p id="testExplanationText"></p>
+                </div>
+                <div class="test-nav">
+                    <button id="btnPrevQuestion" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> <span data-i18n="previous">Previous</span>
+                    </button>
+                    <button id="btnCheckAnswer" class="btn btn-primary">
+                        <i class="fas fa-check"></i> <span data-i18n="checkAnswer">Check Answer</span>
+                    </button>
+                    <button id="btnNextQuestion" class="btn btn-secondary">
+                        <span data-i18n="next">Next</span> <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button id="btnFinishTest" class="btn btn-primary" style="display:none;">
+                        <i class="fas fa-flag-checkered"></i> <span data-i18n="finishTest">Finish Test</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Test Results View -->
+            <section id="view-results" class="view">
+                <h2 data-i18n="testResults">Test Results</h2>
+                <div class="results-summary">
+                    <div class="results-score-circle">
+                        <svg viewBox="0 0 120 120">
+                            <circle cx="60" cy="60" r="54" class="score-bg"></circle>
+                            <circle cx="60" cy="60" r="54" class="score-fill" id="scoreCircle"></circle>
+                        </svg>
+                        <div class="score-text">
+                            <span id="resultScore" class="score-value">0%</span>
+                            <span id="resultPassFail" class="score-label"></span>
+                        </div>
+                    </div>
+                    <div class="results-stats">
+                        <div class="result-stat">
+                            <span class="result-stat-value correct" id="resultCorrect">0</span>
+                            <span class="result-stat-label" data-i18n="correct">Correct</span>
+                        </div>
+                        <div class="result-stat">
+                            <span class="result-stat-value incorrect" id="resultIncorrect">0</span>
+                            <span class="result-stat-label" data-i18n="incorrect">Incorrect</span>
+                        </div>
+                        <div class="result-stat">
+                            <span class="result-stat-value" id="resultUnanswered">0</span>
+                            <span class="result-stat-label" data-i18n="unanswered">Unanswered</span>
+                        </div>
+                        <div class="result-stat">
+                            <span class="result-stat-value" id="resultTime">--</span>
+                            <span class="result-stat-label" data-i18n="timeTaken">Time Taken</span>
+                        </div>
+                    </div>
+                </div>
+                <h3 data-i18n="topicBreakdown">Score by Topic</h3>
+                <div id="topicBreakdown" class="topic-breakdown"></div>
+                <h3 data-i18n="questionReview">Question Review</h3>
+                <div id="questionReview" class="question-review-list"></div>
+                <div class="results-actions">
+                    <button id="btnRetakeTest" class="btn btn-primary">
+                        <i class="fas fa-redo"></i> <span data-i18n="retakeTest">Retake Test</span>
+                    </button>
+                    <button id="btnBackToDashboard" class="btn btn-secondary">
+                        <i class="fas fa-home"></i> <span data-i18n="backToDashboard">Back to Dashboard</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Progress View -->
+            <section id="view-progress" class="view">
+                <h2 data-i18n="progressTitle">Progress Tracker</h2>
+                <div id="progressContent"></div>
+            </section>
+
+            <!-- Import/Export View -->
+            <section id="view-import-export" class="view">
+                <h2 data-i18n="importExportTitle">Import / Export</h2>
+                <div class="import-export-grid">
+                    <div class="ie-card">
+                        <h3><i class="fas fa-file-import"></i> <span data-i18n="importData">Import Data</span></h3>
+                        <p data-i18n="importDesc">Upload a JSON or Excel (.xlsx) file with questions and/or certification structure.</p>
+                        <div class="drop-zone" id="dropZone">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p data-i18n="dropFileHere">Drop file here or click to browse</p>
+                            <input type="file" id="fileInput" accept=".json,.xlsx,.xls" style="display:none;">
+                        </div>
+                        <div id="importPreview" class="import-preview" style="display:none;"></div>
+                        <button id="btnConfirmImport" class="btn btn-primary" style="display:none;">
+                            <i class="fas fa-check"></i> <span data-i18n="confirmImport">Confirm Import</span>
+                        </button>
+                    </div>
+                    <div class="ie-card">
+                        <h3><i class="fas fa-file-export"></i> <span data-i18n="exportData">Export Data</span></h3>
+                        <p data-i18n="exportDesc">Download your data as a JSON file.</p>
+                        <div class="export-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="exportCerts" checked>
+                                <span data-i18n="exportCertStructure">Certification Structure</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="exportQuestions" checked>
+                                <span data-i18n="exportQuestions">Questions</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="exportProgress" checked>
+                                <span data-i18n="exportProgress">Progress Data</span>
+                            </label>
+                        </div>
+                        <select id="exportCertFilter" class="filter-select">
+                            <option value="all" data-i18n="allCertifications">All Certifications</option>
+                        </select>
+                        <button id="btnExportJSON" class="btn btn-primary">
+                            <i class="fas fa-download"></i> <span data-i18n="exportJSON">Export JSON</span>
+                        </button>
+                        <h4 data-i18n="templateTitle" style="margin-top:1.5rem;">Download Template</h4>
+                        <p data-i18n="templateDesc">Download a template to bulk-add questions.</p>
+                        <button id="btnDownloadTemplate" class="btn btn-secondary">
+                            <i class="fas fa-file-download"></i> <span data-i18n="downloadTemplate">Download JSON Template</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Toast notification -->
+    <div id="toast" class="toast" style="display:none;"></div>
+
+    <!-- Scripts -->
+    <script src="js/i18n.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/seed.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
