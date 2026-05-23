@@ -14,6 +14,10 @@ const SeedData = {
                 const cert = Store.getCertifications().find(c => c.code === 'AZ-900');
                 if (cert) { this.seedRepoQuestions(cert.id); localStorage.setItem('quiz_repo_v1', '1'); }
             }
+            if (!localStorage.getItem('quiz_refs_v1')) {
+                this.applyReferences();
+                localStorage.setItem('quiz_refs_v1', '1');
+            }
             return;
         }
 
@@ -410,6 +414,7 @@ const SeedData = {
         this.seedRepoQuestions(az900.id);
         localStorage.setItem('quiz_es_v1', '1');
         localStorage.setItem('quiz_repo_v1', '1');
+        localStorage.setItem('quiz_refs_v1', '1');
     },
 
     applySpanish(certId) {
@@ -419,7 +424,8 @@ const SeedData = {
                 match: 'What is cloud computing?',
                 text_es: '¿Qué es la computación en la nube?',
                 answers_es: ['Entrega de servicios de computación a través de internet', 'Un tipo de lenguaje de programación', 'Un servidor físico en tu oficina', 'Un tipo de cable de red'],
-                explanation_es: 'La computación en la nube es la entrega de servicios de computación—incluyendo servidores, almacenamiento, bases de datos, redes, software, análisis e inteligencia—a través de internet ("la nube") para ofrecer innovación más rápida, recursos flexibles y economías de escala.'
+                explanation_es: 'La computación en la nube es la entrega de servicios de computación—incluyendo servidores, almacenamiento, bases de datos, redes, software, análisis e inteligencia—a través de internet ("la nube") para ofrecer innovación más rápida, recursos flexibles y economías de escala.',
+                reference: 'https://learn.microsoft.com/en-us/training/modules/describe-cloud-compute/3-what-cloud-compute'
             },
             {
                 match: 'Which of the following describes the shared responsibility model in cloud computing?',
@@ -575,6 +581,83 @@ const SeedData = {
         });
     },
 
+    applyReferences() {
+        const refMap = [
+            ['What is cloud computing?', 'https://learn.microsoft.com/en-us/training/modules/describe-cloud-compute/3-what-cloud-compute'],
+            ['shared responsibility model in cloud computing', 'https://learn.microsoft.com/en-us/training/modules/describe-cloud-compute/4-describe-shared-responsibility-model'],
+            ['Which cloud model uses some datacenters', 'https://learn.microsoft.com/en-us/training/modules/describe-cloud-compute/5-define-cloud-models'],
+            ['benefits of cloud computing', 'https://learn.microsoft.com/en-us/training/modules/describe-benefits-use-cloud-services/2-high-availability-scalability-cloud'],
+            ['quickly expand or decrease computer processing', 'https://learn.microsoft.com/en-us/training/modules/describe-benefits-use-cloud-services/2-high-availability-scalability-cloud'],
+            ['most control over the underlying infrastructure', 'https://learn.microsoft.com/en-us/training/modules/describe-cloud-service-types/2-describe-infrastructure-service'],
+            ['Microsoft 365 is an example', 'https://learn.microsoft.com/en-us/training/modules/describe-cloud-service-types/4-describe-software-service'],
+            ['What is an Azure Region?', 'https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/5-describe-azure-physical-infrastructure'],
+            ['logical container for Azure resources', 'https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview'],
+            ['run containerized applications without managing servers', 'https://learn.microsoft.com/en-us/azure/container-instances/container-instances-overview'],
+            ['event-driven, serverless code', 'https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview'],
+            ['purpose of Azure Virtual Network', 'https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview'],
+            ['optimized for storing massive amounts of unstructured data', 'https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-overview'],
+            ['replicates data across three availability zones', 'https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy'],
+            ['What is Microsoft Entra ID', 'https://learn.microsoft.com/en-us/entra/fundamentals/whatis'],
+            ['components of Multi-Factor Authentication', 'https://learn.microsoft.com/en-us/entra/identity/authentication/concept-mfa-howitworks'],
+            ['factors affect the cost of Azure services', 'https://learn.microsoft.com/en-us/training/modules/describe-cost-management-azure/2-describe-factors-affect-costs-azure'],
+            ['estimate the cost of Azure products', 'https://learn.microsoft.com/en-us/training/modules/describe-cost-management-azure/3-compare-pricing-tco-calculators'],
+            ['What is Azure Policy used for?', 'https://learn.microsoft.com/en-us/azure/governance/policy/overview'],
+            ['Azure resource locks used for', 'https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources'],
+            ['command-line interface for managing Azure', 'https://learn.microsoft.com/en-us/cli/azure/what-is-azure-cli'],
+            ['What is Azure Resource Manager', 'https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview'],
+            ['personalized recommendations to improve reliability', 'https://learn.microsoft.com/en-us/azure/advisor/advisor-overview'],
+            ['What does Azure Monitor do?', 'https://learn.microsoft.com/en-us/azure/azure-monitor/overview'],
+            ['Azure Free account', 'https://learn.microsoft.com/en-us/azure/cost-management-billing/manage/create-free-services'],
+            ['Logic apps, Functions, and Service Fabric', 'https://learn.microsoft.com/en-us/azure/architecture/serverless/code'],
+            ['most common uses of Hybrid Clouds', 'https://learn.microsoft.com/en-us/training/modules/describe-cloud-compute/5-define-cloud-models'],
+            ['Hyper-V hosts in a data center', 'https://learn.microsoft.com/en-us/training/modules/describe-cloud-compute/4-describe-cloud-service-types'],
+            ['migrate a web application to Azure', 'https://learn.microsoft.com/en-us/training/modules/describe-cloud-service-types/3-describe-platform-service'],
+            ['Public Cloud ] can decommission', 'https://learn.microsoft.com/en-us/training/modules/describe-cloud-compute/5-define-cloud-models'],
+            ['Skype, Outlook, Office 365', 'https://learn.microsoft.com/en-us/training/modules/describe-cloud-service-types/4-describe-software-service'],
+            ['Pricing calculator ] can be used', 'https://learn.microsoft.com/en-us/training/modules/describe-cost-management-azure/3-compare-pricing-tco-calculators'],
+            ['manage user permissions effectively', 'https://learn.microsoft.com/en-us/azure/role-based-access-control/overview'],
+            ['same resource group but be in multiple locations', 'https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview'],
+            ['Basic Support plan', 'https://learn.microsoft.com/en-us/azure/cost-management-billing/manage/create-free-services'],
+            ['host production-based resources', 'https://learn.microsoft.com/en-us/azure/cost-management-billing/manage/create-free-services'],
+            ['tables with zero infrastructure administration', 'https://learn.microsoft.com/en-us/azure/cosmos-db/introduction'],
+            ['Azure preview features', 'https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/preview-features'],
+            ['virtual machine from a tablet', 'https://learn.microsoft.com/en-us/azure/cloud-shell/overview'],
+            ['on-premises client computers to communicate to Azure', 'https://learn.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpngateways'],
+            ['concept of paired regions', 'https://learn.microsoft.com/en-us/azure/reliability/cross-region-replication-azure'],
+            ['statements for Azure Subscriptions', 'https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-setup-guide/organize-resources'],
+            ['migrating their public web site to Azure', 'https://learn.microsoft.com/en-us/azure/app-service/overview'],
+            ['basic way of protecting an Azure Virtual Network', 'https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview'],
+            ['deploy an AI solution', 'https://learn.microsoft.com/en-us/azure/machine-learning/overview-what-is-azure-machine-learning'],
+            ['Windows 10, MacOS, and Ubuntu', 'https://learn.microsoft.com/en-us/cli/azure/what-is-azure-cli'],
+            ['valid reasons for locking Azure resources', 'https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources'],
+            ['Modern Lifecycle Policy', 'https://learn.microsoft.com/en-us/lifecycle/policies/modern'],
+            ['most immediate savings', 'https://learn.microsoft.com/en-us/azure/cost-management-billing/reservations/save-compute-costs-reservations'],
+            ['eligible to use Azure Government', 'https://learn.microsoft.com/en-us/azure/azure-government/documentation-government-welcome'],
+            ['cost of an unmanaged storage account', 'https://azure.microsoft.com/en-us/pricing/details/bandwidth/'],
+            ['exposing administrative credentials', 'https://learn.microsoft.com/en-us/azure/key-vault/general/overview'],
+            ['compliance of resources across multiple subscriptions', 'https://learn.microsoft.com/en-us/azure/governance/management-groups/overview'],
+            ['group of identical Virtual Machines', 'https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview'],
+            ['maximum number of virtual machines', 'https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview'],
+            ['50 customized VMs each week', 'https://learn.microsoft.com/en-us/azure/devtest-labs/devtest-lab-overview'],
+            ['limit the types of connections from web servers', 'https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview'],
+            ['regarding Azure regions is correct', 'https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview'],
+            ['reduce costs with Azure Virtual Desktop', 'https://learn.microsoft.com/en-us/azure/virtual-desktop/overview'],
+            ['Monitor and control billions', 'https://learn.microsoft.com/en-us/azure/iot-hub/iot-concepts-and-iot-hub'],
+            ['factors that affect cost in Azure', 'https://learn.microsoft.com/en-us/training/modules/describe-cost-management-azure/2-describe-factors-affect-costs-azure'],
+            ['Multi-Factor Authentication make a system more secure', 'https://learn.microsoft.com/en-us/entra/identity/authentication/concept-mfa-howitworks'],
+            ['isolated environment for hosting Virtual Machines', 'https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview'],
+            ['service failure notifications', 'https://learn.microsoft.com/en-us/azure/service-health/overview']
+        ];
+        const questions = Store.getQuestions();
+        let updated = false;
+        questions.forEach(q => {
+            if (q.reference) return;
+            const match = refMap.find(([snippet]) => q.text && q.text.includes(snippet));
+            if (match) { q.reference = match[1]; updated = true; }
+        });
+        if (updated) Store.saveQuestions(questions);
+    },
+
     seedRepoQuestions(certId) {
         const existing = Store.getQuestionsForCert(certId);
         const repoQuestions = [
@@ -591,7 +674,8 @@ const SeedData = {
                     { text: 'Access to certain products that are always free', text_es: 'Acceso a ciertos productos que son siempre gratuitos', correct: false }
                 ],
                 explanation: 'Azure Free account ends after 12 months, requiring pay-as-you-go billing for continued access; no indefinite free access to all products exists post-expiration.',
-                explanation_es: 'La cuenta gratuita de Azure termina después de 12 meses, requiriendo facturación de pago por uso para acceso continuo; no existe acceso gratuito indefinido a todos los productos después de la expiración.'
+                explanation_es: 'La cuenta gratuita de Azure termina después de 12 meses, requiriendo facturación de pago por uso para acceso continuo; no existe acceso gratuito indefinido a todos los productos después de la expiración.',
+                reference: 'https://learn.microsoft.com/en-us/azure/cost-management-billing/manage/create-free-services'
             },
             {
                 certId, topic: 'Describe Cloud Concepts', subtopic: 'Describe cloud computing',
@@ -605,7 +689,8 @@ const SeedData = {
                     { text: 'Software as a Service (SaaS) Model', text_es: 'Modelo de Software como Servicio (SaaS)', correct: false }
                 ],
                 explanation: 'Azure Logic Apps, Functions, and Service Fabric are examples of serverless computing models where Azure handles infrastructure, scaling, and resource management.',
-                explanation_es: 'Azure Logic Apps, Functions y Service Fabric son ejemplos de modelos de computación serverless donde Azure maneja la infraestructura, escalado y gestión de recursos.'
+                explanation_es: 'Azure Logic Apps, Functions y Service Fabric son ejemplos de modelos de computación serverless donde Azure maneja la infraestructura, escalado y gestión de recursos.',
+                reference: 'https://learn.microsoft.com/en-us/azure/architecture/serverless/code'
             },
             {
                 certId, topic: 'Describe Cloud Concepts', subtopic: 'Describe the benefits of using cloud services',
@@ -619,7 +704,8 @@ const SeedData = {
                     { text: 'Virtualization', text_es: 'Virtualización', correct: false }
                 ],
                 explanation: 'Hybrid cloud enables gradual migration and provides disaster recovery/high availability by replicating workloads between on-premises and Azure.',
-                explanation_es: 'La nube híbrida permite la migración gradual y proporciona recuperación ante desastres/alta disponibilidad replicando cargas de trabajo entre infraestructura local y Azure.'
+                explanation_es: 'La nube híbrida permite la migración gradual y proporciona recuperación ante desastres/alta disponibilidad replicando cargas de trabajo entre infraestructura local y Azure.',
+                reference: 'https://learn.microsoft.com/en-us/training/modules/describe-cloud-compute/5-define-cloud-models'
             },
             {
                 certId, topic: 'Describe Cloud Concepts', subtopic: 'Describe cloud computing',
@@ -633,7 +719,8 @@ const SeedData = {
                     { text: 'Scalable', text_es: 'Escalable', correct: false }
                 ],
                 explanation: 'Migrating to Azure pay-as-you-go shifts costs from upfront infrastructure to ongoing usage-based expenses, classified as operational expenditure (OpEx).',
-                explanation_es: 'Migrar a pago por uso de Azure cambia los costos de infraestructura inicial a gastos continuos basados en uso, clasificados como gasto operacional (OpEx).'
+                explanation_es: 'Migrar a pago por uso de Azure cambia los costos de infraestructura inicial a gastos continuos basados en uso, clasificados como gasto operacional (OpEx).',
+                reference: 'https://learn.microsoft.com/en-us/training/modules/describe-cloud-compute/4-describe-cloud-service-types'
             },
             {
                 certId, topic: 'Describe Cloud Concepts', subtopic: 'Describe cloud service types',
@@ -647,7 +734,8 @@ const SeedData = {
                     { text: 'Infrastructure as a Service (IaaS)', text_es: 'Infraestructura como Servicio (IaaS)', correct: false }
                 ],
                 explanation: 'PaaS minimizes administrative effort since Azure manages the hardware, OS, and runtime. Developers focus only on the application logic and data.',
-                explanation_es: 'PaaS minimiza el esfuerzo administrativo ya que Azure gestiona el hardware, el SO y el entorno de ejecución. Los desarrolladores se enfocan solo en la lógica de la aplicación y los datos.'
+                explanation_es: 'PaaS minimiza el esfuerzo administrativo ya que Azure gestiona el hardware, el SO y el entorno de ejecución. Los desarrolladores se enfocan solo en la lógica de la aplicación y los datos.',
+                reference: 'https://learn.microsoft.com/en-us/training/modules/describe-cloud-service-types/3-describe-platform-service'
             },
             // ===== Evaluate type questions =====
             {
@@ -663,7 +751,8 @@ const SeedData = {
                     { text: 'Hybrid Cloud', text_es: 'Nube Híbrida', correct: false }
                 ],
                 explanation: 'Public Cloud means infrastructure is hosted entirely by a cloud provider. The organization no longer depends on on-premises hardware and can decommission its data center.',
-                explanation_es: 'Nube Pública significa que la infraestructura está alojada completamente por un proveedor de nube. La organización ya no depende del hardware local y puede desmantelar su centro de datos.'
+                explanation_es: 'Nube Pública significa que la infraestructura está alojada completamente por un proveedor de nube. La organización ya no depende del hardware local y puede desmantelar su centro de datos.',
+                reference: 'https://learn.microsoft.com/en-us/training/modules/describe-cloud-compute/5-define-cloud-models'
             },
             {
                 certId, topic: 'Describe Cloud Concepts', subtopic: 'Describe cloud service types',
@@ -679,7 +768,8 @@ const SeedData = {
                     { text: 'Function as a Service (FaaS)', text_es: 'Función como Servicio (FaaS)', correct: false }
                 ],
                 explanation: 'Microsoft Skype, Outlook, and Office 365 are SaaS products. Users access ready-to-use software without managing infrastructure.',
-                explanation_es: 'Microsoft Skype, Outlook y Office 365 son productos SaaS. Los usuarios acceden a software listo para usar sin gestionar infraestructura.'
+                explanation_es: 'Microsoft Skype, Outlook y Office 365 son productos SaaS. Los usuarios acceden a software listo para usar sin gestionar infraestructura.',
+                reference: 'https://learn.microsoft.com/en-us/training/modules/describe-cloud-service-types/4-describe-software-service'
             },
             {
                 certId, topic: 'Describe Azure Management and Governance', subtopic: 'Describe cost management in Azure',
@@ -695,7 +785,8 @@ const SeedData = {
                     { text: 'Budgets', text_es: 'Presupuestos', correct: false }
                 ],
                 explanation: 'The TCO Calculator compares on-premises vs Azure costs including hidden costs like electricity, cooling, and IT labor.',
-                explanation_es: 'La Calculadora TCO compara costos locales vs Azure incluyendo costos ocultos como electricidad, refrigeración y mano de obra de TI.'
+                explanation_es: 'La Calculadora TCO compara costos locales vs Azure incluyendo costos ocultos como electricidad, refrigeración y mano de obra de TI.',
+                reference: 'https://learn.microsoft.com/en-us/training/modules/describe-cost-management-azure/3-compare-pricing-tco-calculators'
             },
             // ===== Yes/No type questions =====
             {
@@ -708,7 +799,8 @@ const SeedData = {
                     { text: 'No', text_es: 'No', correct: true }
                 ],
                 explanation: 'Azure Policy is for compliance and governance, not user permissions. Azure RBAC (Role-Based Access Control) should be used for managing user permissions.',
-                explanation_es: 'Azure Policy es para cumplimiento y gobernanza, no para permisos de usuarios. Azure RBAC (Control de Acceso Basado en Roles) debe usarse para gestionar permisos.'
+                explanation_es: 'Azure Policy es para cumplimiento y gobernanza, no para permisos de usuarios. Azure RBAC (Control de Acceso Basado en Roles) debe usarse para gestionar permisos.',
+                reference: 'https://learn.microsoft.com/en-us/azure/role-based-access-control/overview'
             },
             {
                 certId, topic: 'Describe Azure Architecture and Services', subtopic: 'Describe the core architectural components of Azure',
@@ -720,7 +812,8 @@ const SeedData = {
                     { text: 'No', text_es: 'No', correct: false }
                 ],
                 explanation: 'A resource group is a logical container not restricted to a single region. Resources within the group can be deployed to different Azure regions.',
-                explanation_es: 'Un grupo de recursos es un contenedor lógico no restringido a una sola región. Los recursos dentro del grupo pueden desplegarse en diferentes regiones de Azure.'
+                explanation_es: 'Un grupo de recursos es un contenedor lógico no restringido a una sola región. Los recursos dentro del grupo pueden desplegarse en diferentes regiones de Azure.',
+                reference: 'https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview'
             },
             {
                 certId, topic: 'Describe Azure Management and Governance', subtopic: 'Describe cost management in Azure',
@@ -732,7 +825,8 @@ const SeedData = {
                     { text: 'No', text_es: 'No', correct: false }
                 ],
                 explanation: 'The Azure Free Account includes the Basic Support plan at no additional cost, providing 24/7 billing support and community forums.',
-                explanation_es: 'La cuenta gratuita de Azure incluye el plan de soporte Básico sin costo adicional, proporcionando soporte de facturación 24/7 y foros comunitarios.'
+                explanation_es: 'La cuenta gratuita de Azure incluye el plan de soporte Básico sin costo adicional, proporcionando soporte de facturación 24/7 y foros comunitarios.',
+                reference: 'https://learn.microsoft.com/en-us/azure/cost-management-billing/manage/create-free-services'
             },
             {
                 certId, topic: 'Describe Azure Management and Governance', subtopic: 'Describe cost management in Azure',
@@ -744,7 +838,8 @@ const SeedData = {
                     { text: 'No', text_es: 'No', correct: false }
                 ],
                 explanation: 'Technically yes, the Azure Free Account provides access to Azure services that can be used for production, though it is not recommended for long-term or mission-critical workloads due to limitations.',
-                explanation_es: 'Técnicamente sí, la cuenta gratuita de Azure proporciona acceso a servicios que se pueden usar para producción, aunque no se recomienda para cargas de trabajo a largo plazo o de misión crítica debido a limitaciones.'
+                explanation_es: 'Técnicamente sí, la cuenta gratuita de Azure proporciona acceso a servicios que se pueden usar para producción, aunque no se recomienda para cargas de trabajo a largo plazo o de misión crítica debido a limitaciones.',
+                reference: 'https://learn.microsoft.com/en-us/azure/cost-management-billing/manage/create-free-services'
             },
             {
                 certId, topic: 'Describe Azure Architecture and Services', subtopic: 'Describe Azure storage services',
@@ -756,7 +851,8 @@ const SeedData = {
                     { text: 'No', text_es: 'No', correct: true }
                 ],
                 explanation: 'App Service is for web applications, not data storage. Azure Table Storage or Azure Cosmos DB would be the correct choice for tables with zero admin and low latency.',
-                explanation_es: 'App Service es para aplicaciones web, no almacenamiento de datos. Azure Table Storage o Azure Cosmos DB serían la elección correcta para tablas sin administración y baja latencia.'
+                explanation_es: 'App Service es para aplicaciones web, no almacenamiento de datos. Azure Table Storage o Azure Cosmos DB serían la elección correcta para tablas sin administración y baja latencia.',
+                reference: 'https://learn.microsoft.com/en-us/azure/cosmos-db/introduction'
             },
             // ===== Statements type questions =====
             {
@@ -776,7 +872,8 @@ const SeedData = {
                     { text: 'Yes, No, Yes', text_es: 'Sí, No, Sí', correct: false }
                 ],
                 explanation: 'Private preview services are accessed through the same portal. Public preview services can be used in production but are NOT covered by SLAs.',
-                explanation_es: 'Los servicios en vista previa privada se acceden a través del mismo portal. Los servicios en vista previa pública pueden usarse en producción pero NO están cubiertos por SLAs.'
+                explanation_es: 'Los servicios en vista previa privada se acceden a través del mismo portal. Los servicios en vista previa pública pueden usarse en producción pero NO están cubiertos por SLAs.',
+                reference: 'https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/preview-features'
             },
             {
                 certId, topic: 'Describe Azure Architecture and Services', subtopic: 'Describe Azure compute services',
@@ -796,7 +893,8 @@ const SeedData = {
                     { text: 'Yes, No, No, No, Yes', text_es: 'Sí, No, No, No, Sí', correct: false }
                 ],
                 explanation: 'Azure Portal, Bash Cloud Shell, and PowerShell Cloud Shell are all accessible via mobile browser on Android. PowerApps portal and Security admin center cannot create VMs.',
-                explanation_es: 'El Portal de Azure, Bash Cloud Shell y PowerShell Cloud Shell son accesibles a través del navegador móvil en Android. El portal de PowerApps y el centro de administración de Seguridad no pueden crear VMs.'
+                explanation_es: 'El Portal de Azure, Bash Cloud Shell y PowerShell Cloud Shell son accesibles a través del navegador móvil en Android. El portal de PowerApps y el centro de administración de Seguridad no pueden crear VMs.',
+                reference: 'https://learn.microsoft.com/en-us/azure/cloud-shell/overview'
             },
             // ===== Standard questions from Q_Repository =====
             {
@@ -812,7 +910,8 @@ const SeedData = {
                     { text: 'A gateway subnet', text_es: 'Una subred de puerta de enlace', correct: true }
                 ],
                 explanation: 'A Virtual Network Gateway and a Gateway Subnet are required to establish secure VPN connectivity from on-premises networks to Azure VMs.',
-                explanation_es: 'Una Puerta de Enlace de Red Virtual y una Subred de Puerta de Enlace son necesarias para establecer conectividad VPN segura desde redes locales a VMs de Azure.'
+                explanation_es: 'Una Puerta de Enlace de Red Virtual y una Subred de Puerta de Enlace son necesarias para establecer conectividad VPN segura desde redes locales a VMs de Azure.',
+                reference: 'https://learn.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpngateways'
             },
             {
                 certId, topic: 'Describe Azure Architecture and Services', subtopic: 'Describe the core architectural components of Azure',
@@ -826,7 +925,8 @@ const SeedData = {
                     { text: 'Code deployed to one region is automatically deployed to the paired region as backup', text_es: 'El código desplegado en una región se despliega automáticamente en la región emparejada como respaldo', correct: false }
                 ],
                 explanation: 'Paired regions maintain high-speed connections within the same geography. Azure coordinates platform updates sequentially across pairs to ensure at least one remains available.',
-                explanation_es: 'Las regiones emparejadas mantienen conexiones de alta velocidad dentro de la misma geografía. Azure coordina actualizaciones secuencialmente para asegurar que al menos una permanezca disponible.'
+                explanation_es: 'Las regiones emparejadas mantienen conexiones de alta velocidad dentro de la misma geografía. Azure coordina actualizaciones secuencialmente para asegurar que al menos una permanezca disponible.',
+                reference: 'https://learn.microsoft.com/en-us/azure/reliability/cross-region-replication-azure'
             },
             {
                 certId, topic: 'Describe Azure Management and Governance', subtopic: 'Describe cost management in Azure',
@@ -841,7 +941,8 @@ const SeedData = {
                     { text: 'Each Azure Subscription can be managed by using a Microsoft account only', text_es: 'Cada suscripción de Azure solo puede gestionarse usando una cuenta Microsoft', correct: false }
                 ],
                 explanation: 'Companies organize resources across multiple subscriptions for billing, isolation, and governance. Each subscription supports multiple Owner/Contributor role assignments.',
-                explanation_es: 'Las empresas organizan recursos en múltiples suscripciones para facturación, aislamiento y gobernanza. Cada suscripción soporta múltiples asignaciones de roles Owner/Contributor.'
+                explanation_es: 'Las empresas organizan recursos en múltiples suscripciones para facturación, aislamiento y gobernanza. Cada suscripción soporta múltiples asignaciones de roles Owner/Contributor.',
+                reference: 'https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-setup-guide/organize-resources'
             },
             {
                 certId, topic: 'Describe Azure Management and Governance', subtopic: 'Describe cost management in Azure',
@@ -855,7 +956,8 @@ const SeedData = {
                     { text: 'They would need to pay for user data transfer onto the site', text_es: 'Necesitarían pagar por la transferencia de datos de usuario al sitio', correct: false }
                 ],
                 explanation: 'Hosting a public website on Azure involves ongoing subscription costs for the chosen service (App Service, VMs, Static Web Apps).',
-                explanation_es: 'Alojar un sitio web público en Azure implica costos de suscripción continuos para el servicio elegido (App Service, VMs, Static Web Apps).'
+                explanation_es: 'Alojar un sitio web público en Azure implica costos de suscripción continuos para el servicio elegido (App Service, VMs, Static Web Apps).',
+                reference: 'https://learn.microsoft.com/en-us/azure/app-service/overview'
             },
             {
                 certId, topic: 'Describe Azure Architecture and Services', subtopic: 'Describe Azure networking services',
@@ -869,7 +971,8 @@ const SeedData = {
                     { text: 'Network Security Group', text_es: 'Grupo de Seguridad de Red', correct: true }
                 ],
                 explanation: 'An NSG is the fundamental security tool for an Azure VNet. It uses rules to allow or deny traffic based on source/destination IP, port, and protocol.',
-                explanation_es: 'Un NSG es la herramienta de seguridad fundamental para una VNet de Azure. Usa reglas para permitir o denegar tráfico basado en IP de origen/destino, puerto y protocolo.'
+                explanation_es: 'Un NSG es la herramienta de seguridad fundamental para una VNet de Azure. Usa reglas para permitir o denegar tráfico basado en IP de origen/destino, puerto y protocolo.',
+                reference: 'https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview'
             },
             {
                 certId, topic: 'Describe Azure Architecture and Services', subtopic: 'Describe Azure compute services',
@@ -883,7 +986,8 @@ const SeedData = {
                     { text: 'Azure App Service', text_es: 'Azure App Service', correct: false }
                 ],
                 explanation: 'Azure Machine Learning Studio provides a drag-and-drop interface for building, testing, and deploying predictive analytics solutions.',
-                explanation_es: 'Azure Machine Learning Studio proporciona una interfaz de arrastrar y soltar para construir, probar e implementar soluciones de análisis predictivo.'
+                explanation_es: 'Azure Machine Learning Studio proporciona una interfaz de arrastrar y soltar para construir, probar e implementar soluciones de análisis predictivo.',
+                reference: 'https://learn.microsoft.com/en-us/azure/machine-learning/overview-what-is-azure-machine-learning'
             },
             {
                 certId, topic: 'Describe Azure Management and Governance', subtopic: 'Describe features and tools for managing and deploying Azure resources',
@@ -897,7 +1001,8 @@ const SeedData = {
                     { text: 'Azure CLI, Azure PowerShell, and Azure Portal', text_es: 'Azure CLI, Azure PowerShell y Portal de Azure', correct: true }
                 ],
                 explanation: 'All three Azure management tools are fully available on Windows 10. Azure CLI and PowerShell install directly, while the Portal requires only a browser.',
-                explanation_es: 'Las tres herramientas de gestión de Azure están completamente disponibles en Windows 10. Azure CLI y PowerShell se instalan directamente, mientras que el Portal solo requiere un navegador.'
+                explanation_es: 'Las tres herramientas de gestión de Azure están completamente disponibles en Windows 10. Azure CLI y PowerShell se instalan directamente, mientras que el Portal solo requiere un navegador.',
+                reference: 'https://learn.microsoft.com/en-us/cli/azure/what-is-azure-cli'
             },
             {
                 certId, topic: 'Describe Azure Management and Governance', subtopic: 'Describe features and tools in Azure for governance and compliance',
@@ -912,7 +1017,8 @@ const SeedData = {
                     { text: 'Prevent Modification', text_es: 'Prevenir Modificación', correct: true }
                 ],
                 explanation: 'Azure Resource Locks have two types: CanNotDelete (prevents deletion) and ReadOnly (prevents all modifications).',
-                explanation_es: 'Los Bloqueos de Recursos de Azure tienen dos tipos: CanNotDelete (previene eliminación) y ReadOnly (previene todas las modificaciones).'
+                explanation_es: 'Los Bloqueos de Recursos de Azure tienen dos tipos: CanNotDelete (previene eliminación) y ReadOnly (previene todas las modificaciones).',
+                reference: 'https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources'
             },
             {
                 certId, topic: 'Describe Azure Management and Governance', subtopic: 'Describe features and tools in Azure for governance and compliance',
@@ -926,7 +1032,8 @@ const SeedData = {
                     { text: 'Microsoft provides a minimum of 12 months notice before ending support', text_es: 'Microsoft proporciona un mínimo de 12 meses de aviso antes de terminar el soporte', correct: true }
                 ],
                 explanation: 'Under the Modern Lifecycle Policy, Microsoft commits to providing at least 12 months notice before retiring or ending support for a service.',
-                explanation_es: 'Bajo la Política de Ciclo de Vida Moderno, Microsoft se compromete a proporcionar al menos 12 meses de aviso antes de retirar o terminar el soporte de un servicio.'
+                explanation_es: 'Bajo la Política de Ciclo de Vida Moderno, Microsoft se compromete a proporcionar al menos 12 meses de aviso antes de retirar o terminar el soporte de un servicio.',
+                reference: 'https://learn.microsoft.com/en-us/lifecycle/policies/modern'
             },
             {
                 certId, topic: 'Describe Azure Management and Governance', subtopic: 'Describe cost management in Azure',
@@ -940,7 +1047,8 @@ const SeedData = {
                     { text: 'Using Azure Policy to restrict expensive VM SKUs', text_es: 'Usar Azure Policy para restringir SKUs de VM costosos', correct: false }
                 ],
                 explanation: 'Azure Reserved Instances deliver up to 72% savings on VMs by applying discounts instantly upon purchase for predictable workloads.',
-                explanation_es: 'Azure Reserved Instances ofrecen hasta 72% de ahorro en VMs al aplicar descuentos instantáneamente al comprarlos para cargas de trabajo predecibles.'
+                explanation_es: 'Azure Reserved Instances ofrecen hasta 72% de ahorro en VMs al aplicar descuentos instantáneamente al comprarlos para cargas de trabajo predecibles.',
+                reference: 'https://learn.microsoft.com/en-us/azure/cost-management-billing/reservations/save-compute-costs-reservations'
             },
             {
                 certId, topic: 'Describe Azure Management and Governance', subtopic: 'Describe features and tools in Azure for governance and compliance',
@@ -955,7 +1063,8 @@ const SeedData = {
                     { text: 'European government contractor', text_es: 'Contratista del gobierno europeo', correct: false }
                 ],
                 explanation: 'Azure Government is exclusively for U.S. federal, state, local, tribal governments, and their contractors.',
-                explanation_es: 'Azure Government es exclusivamente para gobiernos federales, estatales, locales y tribales de EE.UU., y sus contratistas.'
+                explanation_es: 'Azure Government es exclusivamente para gobiernos federales, estatales, locales y tribales de EE.UU., y sus contratistas.',
+                reference: 'https://learn.microsoft.com/en-us/azure/azure-government/documentation-government-welcome'
             },
             {
                 certId, topic: 'Describe Azure Management and Governance', subtopic: 'Describe cost management in Azure',
@@ -969,7 +1078,8 @@ const SeedData = {
                     { text: 'You are charged for data leaving Azure, and it is difficult to predict that', text_es: 'Se te cobra por datos que salen de Azure, y es difícil predecirlo', correct: true }
                 ],
                 explanation: 'Outbound data transfers (egress) are charged in Azure, while inbound is generally free. Predicting egress patterns makes cost estimation difficult.',
-                explanation_es: 'Las transferencias de datos salientes (egress) se cobran en Azure, mientras que las entrantes son generalmente gratuitas. Predecir patrones de egress hace difícil la estimación de costos.'
+                explanation_es: 'Las transferencias de datos salientes (egress) se cobran en Azure, mientras que las entrantes son generalmente gratuitas. Predecir patrones de egress hace difícil la estimación de costos.',
+                reference: 'https://azure.microsoft.com/en-us/pricing/details/bandwidth/'
             },
             {
                 certId, topic: 'Describe Azure Architecture and Services', subtopic: 'Describe Azure identity, access, and security',
@@ -983,7 +1093,8 @@ const SeedData = {
                     { text: 'Azure Multi-Factor Authentication (MFA)', text_es: 'Autenticación Multi-Factor de Azure (MFA)', correct: false }
                 ],
                 explanation: 'Azure Key Vault securely stores secrets, keys, and certificates. Automation scripts can reference credentials from Key Vault instead of hardcoding them.',
-                explanation_es: 'Azure Key Vault almacena de forma segura secretos, claves y certificados. Los scripts de automatización pueden referenciar credenciales desde Key Vault en lugar de codificarlas.'
+                explanation_es: 'Azure Key Vault almacena de forma segura secretos, claves y certificados. Los scripts de automatización pueden referenciar credenciales desde Key Vault en lugar de codificarlas.',
+                reference: 'https://learn.microsoft.com/en-us/azure/key-vault/general/overview'
             },
             {
                 certId, topic: 'Describe Azure Management and Governance', subtopic: 'Describe features and tools in Azure for governance and compliance',
@@ -997,7 +1108,8 @@ const SeedData = {
                     { text: 'Azure App Service', text_es: 'Azure App Service', correct: false }
                 ],
                 explanation: 'Management Groups organize multiple Azure subscriptions and allow applying governance controls like Azure Policy and RBAC at a higher scope.',
-                explanation_es: 'Los Grupos de Administración organizan múltiples suscripciones de Azure y permiten aplicar controles de gobernanza como Azure Policy y RBAC a un alcance superior.'
+                explanation_es: 'Los Grupos de Administración organizan múltiples suscripciones de Azure y permiten aplicar controles de gobernanza como Azure Policy y RBAC a un alcance superior.',
+                reference: 'https://learn.microsoft.com/en-us/azure/governance/management-groups/overview'
             },
             {
                 certId, topic: 'Describe Azure Architecture and Services', subtopic: 'Describe Azure compute services',
@@ -1011,7 +1123,8 @@ const SeedData = {
                     { text: 'Azure App Service', text_es: 'Azure App Service', correct: false }
                 ],
                 explanation: 'Azure VM Scale Sets deploy and manage a group of identical, load-balanced VMs with automatic scaling and high availability.',
-                explanation_es: 'Azure VM Scale Sets despliegan y gestionan un grupo de VMs idénticas con balanceo de carga, escalado automático y alta disponibilidad.'
+                explanation_es: 'Azure VM Scale Sets despliegan y gestionan un grupo de VMs idénticas con balanceo de carga, escalado automático y alta disponibilidad.',
+                reference: 'https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview'
             },
             {
                 certId, topic: 'Describe Azure Architecture and Services', subtopic: 'Describe Azure compute services',
@@ -1025,7 +1138,8 @@ const SeedData = {
                     { text: '10', text_es: '10', correct: false }
                 ],
                 explanation: 'A single Azure VM Scale Set can manage up to 1,000 VMs using marketplace or custom images from Azure Compute Gallery.',
-                explanation_es: 'Un solo Azure VM Scale Set puede gestionar hasta 1,000 VMs usando imágenes del marketplace o imágenes personalizadas de Azure Compute Gallery.'
+                explanation_es: 'Un solo Azure VM Scale Set puede gestionar hasta 1,000 VMs usando imágenes del marketplace o imágenes personalizadas de Azure Compute Gallery.',
+                reference: 'https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview'
             },
             {
                 certId, topic: 'Describe Azure Architecture and Services', subtopic: 'Describe Azure compute services',
@@ -1039,7 +1153,8 @@ const SeedData = {
                     { text: 'Azure DevTest Labs', text_es: 'Azure DevTest Labs', correct: true }
                 ],
                 explanation: 'Azure DevTest Labs is designed to quickly create, manage, and delete VMs with cost controls like auto-shutdown, quotas, and policies.',
-                explanation_es: 'Azure DevTest Labs está diseñado para crear, gestionar y eliminar VMs rápidamente con controles de costos como apagado automático, cuotas y políticas.'
+                explanation_es: 'Azure DevTest Labs está diseñado para crear, gestionar y eliminar VMs rápidamente con controles de costos como apagado automático, cuotas y políticas.',
+                reference: 'https://learn.microsoft.com/en-us/azure/devtest-labs/devtest-lab-overview'
             },
             {
                 certId, topic: 'Describe Azure Architecture and Services', subtopic: 'Describe Azure networking services',
@@ -1053,7 +1168,8 @@ const SeedData = {
                     { text: 'Azure Traffic Manager', text_es: 'Azure Traffic Manager', correct: false }
                 ],
                 explanation: 'NSGs define inbound and outbound traffic rules at the subnet or NIC level, restricting traffic between web servers and database servers.',
-                explanation_es: 'Los NSGs definen reglas de tráfico entrante y saliente a nivel de subred o NIC, restringiendo el tráfico entre servidores web y servidores de base de datos.'
+                explanation_es: 'Los NSGs definen reglas de tráfico entrante y saliente a nivel de subred o NIC, restringiendo el tráfico entre servidores web y servidores de base de datos.',
+                reference: 'https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview'
             },
             {
                 certId, topic: 'Describe Azure Architecture and Services', subtopic: 'Describe the core architectural components of Azure',
@@ -1067,7 +1183,8 @@ const SeedData = {
                     { text: 'Azure service availability can vary by region', text_es: 'La disponibilidad de servicios de Azure puede variar por región', correct: true }
                 ],
                 explanation: 'Azure services launch on different schedules across regions, so not all services are available everywhere simultaneously.',
-                explanation_es: 'Los servicios de Azure se lanzan en diferentes calendarios entre regiones, por lo que no todos los servicios están disponibles en todas partes simultáneamente.'
+                explanation_es: 'Los servicios de Azure se lanzan en diferentes calendarios entre regiones, por lo que no todos los servicios están disponibles en todas partes simultáneamente.',
+                reference: 'https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview'
             },
             {
                 certId, topic: 'Describe Azure Management and Governance', subtopic: 'Describe cost management in Azure',
@@ -1080,7 +1197,8 @@ const SeedData = {
                     { text: 'Buy one-year or three-year Azure Reserved VM Instances', text_es: 'Comprar Azure Reserved VM Instances de uno o tres años', correct: true }
                 ],
                 explanation: 'Microsoft 365 licensing includes AVD access at no extra cost, while Reserved VM Instances provide 40-72% discounts on session host VMs.',
-                explanation_es: 'Las licencias de Microsoft 365 incluyen acceso a AVD sin costo extra, mientras que las Reserved VM Instances proporcionan descuentos del 40-72% en VMs de host de sesión.'
+                explanation_es: 'Las licencias de Microsoft 365 incluyen acceso a AVD sin costo extra, mientras que las Reserved VM Instances proporcionan descuentos del 40-72% en VMs de host de sesión.',
+                reference: 'https://learn.microsoft.com/en-us/azure/virtual-desktop/overview'
             },
             {
                 certId, topic: 'Describe Azure Architecture and Services', subtopic: 'Describe Azure compute services',
@@ -1094,7 +1212,8 @@ const SeedData = {
                     { text: 'Azure Time Series Insights', text_es: 'Azure Time Series Insights', correct: false }
                 ],
                 explanation: 'Azure IoT Hub provides reliable, secure bi-directional communication to monitor and control billions of IoT devices at scale.',
-                explanation_es: 'Azure IoT Hub proporciona comunicación bidireccional confiable y segura para monitorear y controlar miles de millones de dispositivos IoT a escala.'
+                explanation_es: 'Azure IoT Hub proporciona comunicación bidireccional confiable y segura para monitorear y controlar miles de millones de dispositivos IoT a escala.',
+                reference: 'https://learn.microsoft.com/en-us/azure/iot-hub/iot-concepts-and-iot-hub'
             },
             {
                 certId, topic: 'Describe Azure Management and Governance', subtopic: 'Describe cost management in Azure',
@@ -1110,7 +1229,8 @@ const SeedData = {
                     { text: 'Copying data FROM Azure to on-premises over VPN incurs additional transfer costs', text_es: 'Copiar datos DESDE Azure a infraestructura local por VPN incurre en costos adicionales de transferencia', correct: true }
                 ],
                 explanation: 'Azure charges for storage operations, VM disk storage even when stopped, and outbound (egress) data transfers. Inbound data is free, and Resource Groups have no cost.',
-                explanation_es: 'Azure cobra por operaciones de almacenamiento, almacenamiento de disco de VM incluso cuando está detenida, y transferencias de datos salientes (egress). Los datos entrantes son gratuitos y los Grupos de Recursos no tienen costo.'
+                explanation_es: 'Azure cobra por operaciones de almacenamiento, almacenamiento de disco de VM incluso cuando está detenida, y transferencias de datos salientes (egress). Los datos entrantes son gratuitos y los Grupos de Recursos no tienen costo.',
+                reference: 'https://learn.microsoft.com/en-us/training/modules/describe-cost-management-azure/2-describe-factors-affect-costs-azure'
             },
             {
                 certId, topic: 'Describe Azure Architecture and Services', subtopic: 'Describe Azure identity, access, and security',
@@ -1124,7 +1244,8 @@ const SeedData = {
                     { text: 'It requires access to a verified phone to log in', text_es: 'Requiere acceso a un teléfono verificado para iniciar sesión', correct: true }
                 ],
                 explanation: 'MFA requires a second verification factor (something you have) beyond just a password, preventing unauthorized access even if credentials are compromised.',
-                explanation_es: 'MFA requiere un segundo factor de verificación (algo que tienes) más allá de una contraseña, previniendo acceso no autorizado incluso si las credenciales se comprometen.'
+                explanation_es: 'MFA requiere un segundo factor de verificación (algo que tienes) más allá de una contraseña, previniendo acceso no autorizado incluso si las credenciales se comprometen.',
+                reference: 'https://learn.microsoft.com/en-us/entra/identity/authentication/concept-mfa-howitworks'
             },
             {
                 certId, topic: 'Describe Azure Architecture and Services', subtopic: 'Describe Azure networking services',
@@ -1138,7 +1259,8 @@ const SeedData = {
                     { text: 'Azure App Service', text_es: 'Azure App Service', correct: false }
                 ],
                 explanation: 'Azure Virtual Network provides network isolation for hosting VMs by creating dedicated, private network spaces.',
-                explanation_es: 'Azure Virtual Network proporciona aislamiento de red para alojar VMs creando espacios de red dedicados y privados.'
+                explanation_es: 'Azure Virtual Network proporciona aislamiento de red para alojar VMs creando espacios de red dedicados y privados.',
+                reference: 'https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview'
             },
             {
                 certId, topic: 'Describe Azure Management and Governance', subtopic: 'Describe monitoring tools in Azure',
@@ -1152,7 +1274,8 @@ const SeedData = {
                     { text: 'Azure Advisor', text_es: 'Azure Advisor', correct: false }
                 ],
                 explanation: 'Azure Monitor provides service health alerts, metrics, and notifications for region-specific issues affecting VM availability.',
-                explanation_es: 'Azure Monitor proporciona alertas de salud del servicio, métricas y notificaciones para problemas regionales que afectan la disponibilidad de VMs.'
+                explanation_es: 'Azure Monitor proporciona alertas de salud del servicio, métricas y notificaciones para problemas regionales que afectan la disponibilidad de VMs.',
+                reference: 'https://learn.microsoft.com/en-us/azure/service-health/overview'
             }
         ];
 

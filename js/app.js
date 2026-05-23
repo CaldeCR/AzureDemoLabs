@@ -471,6 +471,7 @@ const App = {
             document.getElementById('questionExplanation').value = q.explanation || '';
             document.getElementById('questionText_es').value = q.text_es || '';
             document.getElementById('questionExplanation_es').value = q.explanation_es || '';
+            document.getElementById('questionReference').value = q.reference || '';
             this.onQuestionTypeChange();
             if (q.type === 'evaluate') {
                 document.getElementById('bracketContext').value = q.bracketContext || '';
@@ -488,6 +489,7 @@ const App = {
             document.getElementById('questionType').value = 'single';
             document.getElementById('questionExplanation').value = '';
             document.getElementById('questionExplanation_es').value = '';
+            document.getElementById('questionReference').value = '';
             this.onQuestionTypeChange();
             this.renderAnswersEditor([
                 { text: '', correct: false },
@@ -754,6 +756,7 @@ const App = {
         const cert = this.getActiveCert();
         const text_es = document.getElementById('questionText_es').value.trim();
         const explanation_es = document.getElementById('questionExplanation_es').value.trim();
+        const reference = document.getElementById('questionReference').value.trim();
 
         const question = {
             certId: cert.id,
@@ -764,7 +767,8 @@ const App = {
             type,
             answers,
             explanation,
-            explanation_es
+            explanation_es,
+            reference
         };
 
         // Add type-specific fields
@@ -1095,6 +1099,16 @@ const App = {
             explDiv.style.display = 'block';
         } else {
             explDiv.style.display = 'none';
+        }
+
+        // Reference link
+        const refLink = document.getElementById('testReferenceLink');
+        if (q.checked && q.reference) {
+            refLink.href = q.reference;
+            document.getElementById('testReferenceLinkUrl').textContent = q.reference;
+            refLink.style.display = 'inline-flex';
+        } else {
+            refLink.style.display = 'none';
         }
 
         // Buttons

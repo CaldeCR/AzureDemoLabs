@@ -243,6 +243,10 @@
                                 <label>Explicación (Español)</label>
                                 <textarea id="questionExplanation_es" rows="2" placeholder="Explicación en español (opcional)..."></textarea>
                             </div>
+                            <div class="form-group">
+                                <label data-i18n="reference">Reference</label>
+                                <input type="url" id="questionReference" data-i18n-placeholder="referencePlaceholder" placeholder="https://learn.microsoft.com/...">
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button id="btnSaveQuestion" class="btn btn-primary" data-i18n="save">Save</button>
@@ -343,6 +347,9 @@
                         <i class="fas fa-lightbulb"></i> <span data-i18n="explanation">Explanation</span>
                     </div>
                     <p id="testExplanationText"></p>
+                    <a id="testReferenceLink" class="reference-link" href="#" target="_blank" rel="noopener noreferrer" style="display:none;">
+                        <i class="fas fa-book"></i> <span data-i18n="reference">Reference</span>: <span id="testReferenceLinkUrl"></span>
+                    </a>
                 </div>
                 <div class="test-nav">
                     <button id="btnPrevQuestion" class="btn btn-secondary">

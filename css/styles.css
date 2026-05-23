@@ -824,6 +824,23 @@ input:focus, textarea:focus, select:focus {
 
 .test-explanation p { font-size: 0.9rem; line-height: 1.5; }
 
+.reference-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.75rem;
+    padding: 0.4rem 0.75rem;
+    background: var(--primary-light);
+    color: var(--primary);
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    text-decoration: none;
+    word-break: break-all;
+    transition: background 0.2s;
+}
+.reference-link:hover { background: var(--primary); color: #fff; }
+.reference-link i { flex-shrink: 0; }
+
 .test-nav {
     display: flex;
     gap: 0.75rem;
