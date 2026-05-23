@@ -13,6 +13,7 @@ D. Access to certain products that are always free
 
 Correct
 Option C (Free access to all Azure products after the 12 months expiration period): Azure Free account ends after 12 months, requiring pay-as-you-go billing for continued access; no indefinite free access to all products exists post-expiration.
+Reference: https://learn.microsoft.com/en-us/azure/cost-management-billing/manage/create-free-services
 
 
 2. Question
@@ -32,6 +33,7 @@ Azure Logic Apps, Functions, and Service Fabric are examples of serverless compu
 In serverless, developers focus on writing code or workflows while Azure automatically handles infrastructure, scaling, and resource management.
 You only pay for execution time or triggers, making it cost-efficient and highly scalable.
 This is a key concept tested in the AZ-900 exam.
+Reference: https://learn.microsoft.com/en-us/azure/architecture/serverless/code
 
 
 3. Question
@@ -51,6 +53,7 @@ Option D – Gateway Subnet
 Required to configure a VPN gateway in Azure. The gateway subnet is a dedicated subnet within the virtual network that hosts the VPN gateway resources. Without this, on‑premises clients cannot connect securely to Azure VMs.
 Option E – Virtual Network Private Gateway
 Also required to establish secure communication between on‑premises client computers and Azure VMs. The VPN gateway provides the encrypted tunnel for traffic between the two environments.
+Reference: https://learn.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpngateways
 
 4. Question
 Exam notes:
@@ -70,6 +73,7 @@ Hybrid cloud enables gradual migration by running some workloads on-premises whi
 
 option C. High availability
 Hybrid setups provide disaster recovery and high availability by replicating critical workloads to Azure while keeping primary operations on-premises.
+Reference: https://learn.microsoft.com/en-us/training/modules/describe-cloud-compute/5-define-cloud-models
 
 
 5. Question
@@ -83,6 +87,7 @@ D. When you deploy your code to one region of the world, it is automatically dep
 Correct: 
 Option  C. Each region in the world has at least one other region in which it shares an extremely high speed connection, and where there is coordinated action by Azure not to do anything that will bring them both down at the same time.
 Paired regions maintain high-speed, low-latency connections within the same geography. Azure coordinates platform updates sequentially across pairs to ensure at least one region remains available during planned maintenance or outages.
+Reference: https://learn.microsoft.com/en-us/azure/reliability/cross-region-replication-azure
 
 
 6. Question
@@ -99,6 +104,7 @@ Option A. A company can store resources in multiple subscriptions
 Option C. Each Azure Subscription can contain multiple account Admins
 
 Azure Subscription Fundamentals: Companies organize resources across multiple subscriptions for billing, isolation, and governance. Each subscription supports multiple Owner/Contributor role assignments for administration.
+Reference: https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-setup-guide/organize-resources
 
 
 7. Question
@@ -115,6 +121,7 @@ Option C. Paying a monthly cost for the solution
 This is correct. Hosting a public website on Azure involves ongoing subscription costs for the chosen service (e.g., Azure App Service, Azure Virtual Machines, or Azure Static Web Apps).
 Costs depend on compute, storage, bandwidth, and scaling requirements.
 This is the key consideration when migrating a public website to Azure.
+Reference: https://learn.microsoft.com/en-us/azure/app-service/overview
 
 8. Question
 You have 1,000 virtual machines hosted on the Hyper-V hosts in a data center.
@@ -130,6 +137,7 @@ D. scalable
 Correct:
 Option A. operational
 Migrating virtual machines to an Azure pay-as-you-go subscription shifts costs from upfront infrastructure purchases to ongoing usage-based expenses. In Azure, you pay only for the compute, storage, and networking resources you consume, which is classified as operational expenditure (OpEx) rather than capital expenditure.
+Reference: https://learn.microsoft.com/en-us/training/modules/describe-cloud-compute/4-describe-cloud-service-types
 
 
 9. Question
@@ -151,6 +159,7 @@ Option D. Managing physical server security
 
 Correct because physical security (data center access, surveillance, guards, etc.) is handled by Microsoft in Azure.
 This reduces the burden on administrators compared to on‑premises servers.
+Reference: https://learn.microsoft.com/en-us/azure/security/fundamentals/shared-responsibility
 
 
 10. Question
@@ -166,6 +175,7 @@ Option D: Network Security Group (NSG)
 The Logic: An NSG is the most basic and fundamental security tool for an Azure Virtual Network (VNet). It acts as a simplified firewall that uses rules to allow or deny inbound and outbound traffic based on source/destination IP address, port, and protocol.
 
 Granularity: NSGs can be associated directly with a subnet or an individual network interface (NIC) on a Virtual Machine. This makes it the primary mechanism for segmenting traffic within a VNet.
+Reference: https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview
 
 11. Question
 Exam note: This question requires you to evaluate the text inside [ ] to determine if it is correct
@@ -185,6 +195,7 @@ Public Cloud means infrastructure is hosted entirely by a cloud provider (e.g., 
 Organization no longer depends on on‑premises hardware.
 Can decommission its physical data center.
 Matches the statement correctly.
+Reference: https://learn.microsoft.com/en-us/training/modules/describe-cloud-compute/5-define-cloud-models
 
 
 12. Question
@@ -199,6 +210,7 @@ Correct
 Option B. Azure Machine Learning Studio
 Reasoning: Azure Machine Learning Studio is the correct tool for building, testing, and deploying predictive analytics solutions. It provides a drag‑and‑drop interface, supports training ML models, and integrates with deployment pipelines.
 Exam Focus: When the question mentions AI solution + predictive analytics + build/test/deploy, the correct answer is Azure Machine Learning Studio.
+Reference: https://learn.microsoft.com/en-us/azure/machine-learning/overview-what-is-azure-machine-learning
 
 
 13. Question
@@ -211,6 +223,7 @@ B. No
 
 Correct
 Option B (No): Azure AD (Entra ID) groups cannot directly receive Azure RBAC permissions without explicit role assignments. Users in groups inherit permissions only after the group is assigned an Azure role at the appropriate scope (subscription, resource group, or resource).
+Reference: https://learn.microsoft.com/en-us/azure/role-based-access-control/overview
 
 
 14. Question
@@ -227,6 +240,7 @@ D. The Azure CLI, Azure Powershell and Azure Portal
 
 Correct 
 Option D (The Azure CLI, Azure Powershell and Azure Portal): All three primary Azure management interfaces are fully accessible from standard Windows workstations. Azure CLI and PowerShell install directly, while the Portal requires only a web browser.
+Reference: https://learn.microsoft.com/en-us/cli/azure/what-is-azure-cli
 
 
 15. Question
@@ -250,6 +264,7 @@ E. Managing permissions to shared documents
 
 Correct
 Option A. Replacing failed server hardware: Azure certification exams test Shared Responsibility Model. Cloud providers handle IaaS hardware replacement, fully eliminating this customer responsibility.
+Reference: https://learn.microsoft.com/en-us/azure/security/fundamentals/shared-responsibility
 
 
 16. Question
@@ -274,6 +289,7 @@ Prevents accidental deletion of critical resources. Users can still read/modify 
 
 option E. ReadOnly (Modification Lock)
 Prevents all changes (updates, deletes). Users can only read resource configuration.
+Reference: https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources
 
 
 17. Question
@@ -298,6 +314,7 @@ Applications hosted by provider (Microsoft)
 Automatic updates/patching
 Subscription-based access
 No server/OS management required
+Reference: https://learn.microsoft.com/en-us/training/modules/describe-cloud-service-types/4-describe-software-service
 
 18. Question
 A company is planning on deploying Azure resources to a resource group. But the resources would belong to different locations. Can you have resources that belong to the same resource group but be in multiple locations?
@@ -306,6 +323,7 @@ B- No
 
 Option A. Yes
 In Azure, a resource group is a logical container for resources and is not restricted to a single region. While the resource group itself has a location (used only for storing metadata), the resources within the group can be deployed to different Azure regions. This allows related resources in multiple locations to be managed together.
+Reference: https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview
 
 19. Question
 Which statement accurately describes the Modern Lifecycle Policy for Azure services?
@@ -322,6 +340,7 @@ Reasoning:
 Under the Modern Lifecycle Policy, Azure services do not follow fixed support timelines (like 5 years mainstream + 5 years extended).
 Instead, Microsoft commits to providing at least 12 months’ notice before retiring or ending support for a service.
 This ensures customers have sufficient time to plan migrations or adjustments.
+Reference: https://learn.microsoft.com/en-us/lifecycle/policies/modern
 
 20. Question
 You have a virtual machine named myVM that run Windows Server. myVM is in the Australia East Azure region.
@@ -336,6 +355,7 @@ D- Azure Advisor
 Correct
 Option A: Azure Monitor
 Provides service health alerts, metrics, and notifications for region-specific issues affecting VM availability, viewable via the Azure portal.
+Reference: https://learn.microsoft.com/en-us/azure/service-health/overview
 
 
 21. Question
@@ -350,6 +370,7 @@ D- Using Azure Policy to restrict the user of expensive VM SKUs.
 Correct:
 Option C
 Using Azure Reserved Instances delivers the most immediate savings (up to 72% on VMs) because they apply discounts instantly upon purchase to existing or new predictable workloads, providing the highest percentage reduction compared to other options in AZ-900 cost management scenarios.
+Reference: https://learn.microsoft.com/en-us/azure/cost-management-billing/reservations/save-compute-costs-reservations
 
 22. Question
 Which types of customers are eligible to use the Azure Government to develop a cloud solution?
@@ -365,7 +386,8 @@ E- European government contractor
 
 Correct
 Option A. United States government contractor Azure Government is designed specifically for U.S. federal, state, local, and tribal governments, as well as their contractors. Government contractors in the United States are eligible because they often handle sensitive workloads and must comply with strict regulatory requirements.
-Option C. United States government entity U.S. government entities (federal agencies, state governments, local municipalities, and tribal organizations) are eligible to use Azure Government. This aligns with Microsoft’s compliance framework for handling controlled and classified data within U.S. jurisdictions.
+Option C. United States government entity U.S. government entities (federal agencies, state governments, local municipalities, and tribal organizations) are eligible to use Azure Government. This aligns with Microsoft's compliance framework for handling controlled and classified data within U.S. jurisdictions.
+Reference: https://learn.microsoft.com/en-us/azure/azure-government/documentation-government-welcome
 
 23. Question
 What makes estimating the cost of an unmanaged storage account difficult?
@@ -381,6 +403,7 @@ Option D. You are charged for data leaving Azure, and it’s difficult to predic
 Correct because in Azure, outbound data transfers (egress) are charged, while inbound data transfers are generally free.
 For an unmanaged storage account, the challenge lies in predicting how much data will leave Azure, since usage patterns can vary widely.
 This unpredictability makes cost estimation difficult, especially for workloads with fluctuating or unknown external access requirements.
+Reference: https://azure.microsoft.com/en-us/pricing/details/bandwidth/
 
 
 24. Question
@@ -395,6 +418,7 @@ D- Azure Functions
 Correct
 option D. Azure Functions
 Event-triggered code; seconds response.
+Reference: https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview
 
 
 25. Question
@@ -416,6 +440,7 @@ During automation (for example, via ARM templates, Azure CLI, or PowerShell), yo
 This ensures credentials are never exposed in deployment code, and access can be controlled via Azure RBAC and policies.
 
 https://docs.microsoft.com/en-us/azure/key-vault/key-vault-overview
+Updated Reference: https://learn.microsoft.com/en-us/azure/key-vault/general/overview
 
 
 26. Question
@@ -428,6 +453,7 @@ D- Azure Event Hubs
  
 Correct
 Option C. Azure Monitor Correct because Azure Monitor provides insights into the health and performance of Azure resources. It includes Service Health notifications, which alert you to service issues, outages, or planned maintenance that could affect the availability of your VM. This is the right service to use for monitoring failures impacting azureVM.
+Reference: https://learn.microsoft.com/en-us/azure/service-health/overview
 
 
 27. Question
@@ -451,6 +477,7 @@ Correct:
 
 Option B. Management Groups
 Management Groups are designed to organize and manage multiple Azure subscriptions together. They allow you to apply governance controls such as Azure Policy and role-based access control (RBAC) at a higher scope than a single subscription. This makes them ideal for managing compliance consistently across multiple subscriptions, which directly meets the requirement in the question.
+Reference: https://learn.microsoft.com/en-us/azure/governance/management-groups/overview
 
 
 28. Question
@@ -470,6 +497,7 @@ Option C: Total Cost of Ownership Calculator (TCO)
 
 The “Migration” Tool: The TCO Calculator is specifically designed to compare the cost of running your infrastructure on-premises versus the cost of running it on Azure.
 Cost Savings Focus: It accounts for hidden costs that the standard pricing calculator ignores, such as electricity, floor space, cooling, and IT labor. By inputting your current hardware and operational costs, it generates a report showing the projected cost savings over a multi-year period (e.g., 3 or 5 years).
+Reference: https://learn.microsoft.com/en-us/training/modules/describe-cost-management-azure/3-compare-pricing-tco-calculators
 
 
 29. Question
@@ -485,6 +513,7 @@ D. Azure App Service
 
 Correct
 Option B (Azure Virtual Machine Scale Sets): Azure Virtual Machine Scale Sets are designed to deploy and manage a group of identical, load-balanced VMs with automatic scaling and high availability capabilities.
+Reference: https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview
 
 
 How does Multi-Factor Authentication make a system more secure?
@@ -496,6 +525,7 @@ D- It requires the user to have access to their verified phone in order to log i
 
 Correct Answer: D
 Multi-Factor Authentication (MFA) enhances security by requiring a second verification factor, such as access to a verified phone, beyond just a password. This “something you have” element prevents unauthorized access even if credentials are compromised, a core AZ-900 concept in Azure identity.
+Reference: https://learn.microsoft.com/en-us/entra/identity/authentication/concept-mfa-howitworks
 
 
 31. Question
@@ -510,6 +540,7 @@ D. Azure App Service
 
 Correct
 Option C (Azure Virtual Network): Azure Virtual Network (VNet) provides network isolation for hosting Virtual Machines by creating dedicated, private network spaces that segment and secure VM traffic from other Azure resources and the internet.
+Reference: https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview
 
 
 32. Question
@@ -524,6 +555,7 @@ Option A: Yes
 Correct because the Azure Free Account includes the Basic Support plan at no additional cost.
 Basic Support provides 24/7 access to billing and subscription support, access to the Azure community forums, and limited technical support resources.
 This is the default support level included with all Azure accounts, including free ones.
+Reference: https://learn.microsoft.com/en-us/azure/cost-management-billing/manage/create-free-services
 
 
 33. Question
@@ -549,6 +581,7 @@ When an Azure virtual machine is stopped (but not deleted), you no longer pay fo
 
 Option F.
 Data transfer costs in Azure are affected by network egress. Copying several gigabytes of data from Azure to an on-premises network over a VPN results in outbound data transfer charges. This is a valid cost factor in Azure, so this statement is correct.
+Reference: https://learn.microsoft.com/en-us/training/modules/describe-cost-management-azure/2-describe-factors-affect-costs-azure
 
 
 34. Question
@@ -570,6 +603,7 @@ Option A: NO YES NO
 This is the correct answer set.
 It matches the expected truth values for the given statements in the AZ-900 practice test context.
 The first and third statements are false, while the second statement is true.
+Reference: https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/preview-features
 
 
 35. Question
@@ -586,6 +620,7 @@ Option A. Yes
 Correct because technically, the Azure Free Account provides access to Azure services and resources that can be used for production workloads.
 However, the free account comes with limitations such as restricted quotas, credits (usually $200 for 30 days), and limited free-tier services.
 While production workloads can be hosted, it is not recommended for long-term or mission-critical production environments due to these constraints.
+Reference: https://learn.microsoft.com/en-us/azure/cost-management-billing/manage/create-free-services
 
 
 36. Question
@@ -604,6 +639,7 @@ Option A. Platform as a Service (PaaS)
 Correct because PaaS allows you to deploy and manage applications without worrying about the underlying infrastructure (servers, operating systems, patching).
 It minimizes administrative effort since Azure manages the hardware, OS, and runtime environment.
 Developers focus only on the application logic and data, making it the best fit for migrating a web application with external users.
+Reference: https://learn.microsoft.com/en-us/training/modules/describe-cloud-service-types/3-describe-platform-service
 
 
 37. Question
@@ -625,6 +661,7 @@ This is a valid cost management consideration.
 Option D. When Azure virtual machine is stopped, you continue to pay storage costs associated with the Virtual Machine.
 Even when a VM is stopped (deallocated), you no longer pay for compute, but you still pay for storage costs (OS disk, data disks, snapshots).
 This is a correct statement about ongoing costs.
+Reference: https://learn.microsoft.com/en-us/training/modules/describe-cost-management-azure/2-describe-factors-affect-costs-azure
 
 
 38. Question
@@ -643,6 +680,7 @@ Option A. Azure Virtual Desktop is available to you at no additional cost if you
 Option C. Buy one-year or three-year Azure Reserved Virtual Machine Instances to save cost.
 
 Microsoft 365 licensing includes AVD access at no extra compute cost (F E3/E5, E3/E5), while Reserved VM Instances provide 40-72% discounts on session host VMs through 1/3-year commitments.
+Reference: https://learn.microsoft.com/en-us/azure/virtual-desktop/overview
 
 
 39. Question
@@ -657,6 +695,7 @@ Correct:
 Option B – 1000
 
 A single Azure Virtual Machine Scale Set can manage up to 1,000 VMs when using marketplace images or custom images from Azure Compute Gallery. This is the standard AZ-900 limit for scale sets designed for high-availability, auto-scaling workloads.
+Reference: https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview
 
 
 40. Question
@@ -675,6 +714,7 @@ Correct:
 
 Option D. Azure DevTest Labs
 Azure DevTest Labs is designed specifically to quickly create, manage, and delete virtual machines while minimizing both cost and administrative overhead. It supports Windows and Linux VMs, allows the use of custom images, and includes features such as auto-shutdown, quotas, and policies. These capabilities make it ideal for environments where VMs are frequently deployed and removed, such as weekly test or development workloads.
+Reference: https://learn.microsoft.com/en-us/azure/devtest-labs/devtest-lab-overview
 
 
 41. Question
@@ -707,6 +747,7 @@ Fully responsive web interface – primary method for VM creation from any devic
 
 Yes: Bash in Azure Cloud Shell ✓
 Linux shell via mobile browser – az vm create commands supported.
+Reference: https://learn.microsoft.com/en-us/azure/cloud-shell/overview
 
 
 42. Question
@@ -724,6 +765,7 @@ Option A. Network Security Group (NSG)
 Correct because NSGs allow you to define inbound and outbound traffic rules at the subnet or NIC level.
 You can restrict traffic so that only specific ports (e.g., SQL port 1433) are allowed between web servers and database servers.
 Key exam concept: NSGs are the primary tool for controlling traffic between Azure resources.
+Reference: https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview
 
 
 43. Question
@@ -740,6 +782,7 @@ Correct:
 
 Option D. Azure service availability can vary by region
 Azure services launch on different schedules across regions, so not all services are available everywhere simultaneously.
+Reference: https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview
 
 
 44. Question
@@ -762,6 +805,7 @@ Virtual Network Gateway enables secure VPN connectivity from on-premises network
 
 Option E. a gateway subnet
 Gateway Subnet is required in the Azure VNet to deploy the Virtual Network Gateway for on-premises connectivity.
+Reference: https://learn.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpngateways
 
 
 45. Question
@@ -779,6 +823,7 @@ Azure App Service is a Platform as a Service (PaaS) offering designed for hostin
 It is not intended for hosting or managing tables or structured data.
 For hosting tables with zero infrastructure administration and low latency access, the correct Azure service would be Azure Table Storage (part of Azure Storage) or Azure Cosmos DB (for globally distributed, low-latency access).
 Therefore, recommending App Service is incorrect, so the correct answer is No.
+Reference: https://learn.microsoft.com/en-us/azure/cosmos-db/introduction
 
 
 46. Question
@@ -792,3 +837,4 @@ D. Azure Time Series Insights
 
 Correct 
 Option A (IoT Hub): Azure AZ-900 exams test core IoT services. Azure IoT Hub provides reliable, secure bi-directional communication to monitor and control billions of IoT devices at scale with device-to-cloud telemetry and cloud-to-device commands.
+Reference: https://learn.microsoft.com/en-us/azure/iot-hub/iot-concepts-and-iot-hub
