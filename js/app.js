@@ -345,9 +345,10 @@ const App = {
         document.getElementById('btnCancelQuestion').addEventListener('click', () => this.closeQuestionModal());
         document.getElementById('btnSaveQuestion').addEventListener('click', () => this.saveQuestion());
         document.getElementById('btnAddAnswer').addEventListener('click', () => this.addAnswerEntry());
+        document.getElementById('btnAddStatement').addEventListener('click', () => this.addStatementEntry());
 
         document.getElementById('questionTopic').addEventListener('change', () => this.onQuestionTopicChange());
-        document.getElementById('questionType').addEventListener('change', () => this.renderAnswerMarkers());
+        document.getElementById('questionType').addEventListener('change', () => this.onQuestionTypeChange());
 
         // Filters
         document.getElementById('filterTopic').addEventListener('change', () => {
@@ -402,7 +403,8 @@ const App = {
 
         container.innerHTML = questions.map(q => {
             const bookmarked = Store.isBookmarked(q.id);
-            const typeLabel = q.type === 'multi' ? I18N.t('multiAnswer') : I18N.t('singleAnswer');
+            const typeLabelMap = { single: 'singleAnswer', multi: 'multiAnswer', yesno: 'yesNoAnswer', evaluate: 'evaluateAnswer', statements: 'statementsAnswer' };
+            const typeLabel = I18N.t(typeLabelMap[q.type] || 'singleAnswer');
             return `
                 <div class="question-item">
                     <div class="question-item-text">
@@ -469,6 +471,14 @@ const App = {
             document.getElementById('questionExplanation').value = q.explanation || '';
             document.getElementById('questionText_es').value = q.text_es || '';
             document.getElementById('questionExplanation_es').value = q.explanation_es || '';
+            this.onQuestionTypeChange();
+            if (q.type === 'evaluate') {
+                document.getElementById('bracketContext').value = q.bracketContext || '';
+                document.getElementById('bracketContext_es').value = q.bracketContext_es || '';
+            }
+            if (q.type === 'statements') {
+                this.renderStatementsEditor(q.statements || []);
+            }
             this.renderAnswersEditor(q.answers || []);
         } else {
             title.textContent = I18N.t('addQuestion');
@@ -478,6 +488,7 @@ const App = {
             document.getElementById('questionType').value = 'single';
             document.getElementById('questionExplanation').value = '';
             document.getElementById('questionExplanation_es').value = '';
+            this.onQuestionTypeChange();
             this.renderAnswersEditor([
                 { text: '', correct: false },
                 { text: '', correct: false },
@@ -514,8 +525,48 @@ const App = {
     renderAnswersEditor(answers) {
         const container = document.getElementById('answersEditor');
         const type = document.getElementById('questionType').value;
-        const inputType = type === 'multi' ? 'checkbox' : 'radio';
 
+        if (type === 'yesno') {
+            container.innerHTML = `
+                <div class="yesno-preview">
+                    <div class="yesno-btn-preview yes"><i class="fas fa-check"></i> ${I18N.t('yes')}</div>
+                    <div class="yesno-btn-preview no"><i class="fas fa-times"></i> ${I18N.t('no')}</div>
+                </div>
+                <div class="form-group" style="margin-top:0.75rem;">
+                    <label>${I18N.t('correctAnswer')}</label>
+                    <select id="yesnoCorrect" class="filter-select">
+                        <option value="yes" ${answers[0]?.correct ? 'selected' : ''}>${I18N.t('yes')}</option>
+                        <option value="no" ${answers[1]?.correct ? 'selected' : ''}>${I18N.t('no')}</option>
+                    </select>
+                </div>`;
+            return;
+        }
+
+        if (type === 'statements') {
+            container.innerHTML = '<p class="text-muted" style="font-size:0.85rem;">Answers are auto-generated from statements above.</p>';
+            return;
+        }
+
+        if (type === 'evaluate') {
+            // For evaluate type, first option is always "No change needed"
+            const inputType = 'radio';
+            container.innerHTML = answers.map((a, i) => {
+                const placeholder = i === 0 ? I18N.t('noChangeNeeded') : `Alternative ${i} (EN)`;
+                const placeholderEs = i === 0 ? '' : `Alternativa ${i} (ES)`;
+                return `
+                <div class="answer-entry ${i === 0 ? 'no-change-entry' : ''}">
+                    <input type="${inputType}" name="correctAnswer" class="answer-correct" data-idx="${i}" ${a.correct ? 'checked' : ''}>
+                    <span class="answer-correct-label">${I18N.t('markCorrect')}</span>
+                    <input type="text" class="answer-text" data-idx="${i}" value="${this.escapeHtml(a.text)}" placeholder="${placeholder}" ${i === 0 ? 'readonly' : ''}>
+                    <input type="text" class="answer-text-es" data-idx="${i}" value="${this.escapeHtml(a.text_es || '')}" placeholder="${placeholderEs}" ${i === 0 ? 'readonly' : ''}>
+                    ${i > 0 ? `<button class="btn btn-danger btn-sm" onclick="App.removeAnswer(${i})"><i class="fas fa-times"></i></button>` : ''}
+                </div>`;
+            }).join('');
+            return;
+        }
+
+        // Standard single/multi
+        const inputType = type === 'multi' ? 'checkbox' : 'radio';
         container.innerHTML = answers.map((a, i) => `
             <div class="answer-entry">
                 <input type="${inputType}" name="correctAnswer" class="answer-correct" data-idx="${i}" ${a.correct ? 'checked' : ''}>
@@ -527,11 +578,47 @@ const App = {
     },
 
     renderAnswerMarkers() {
+        const type = document.getElementById('questionType').value;
+        if (type === 'yesno' || type === 'statements') return;
         const answers = this.getAnswersFromEditor();
         this.renderAnswersEditor(answers);
     },
 
     getAnswersFromEditor() {
+        const type = document.getElementById('questionType').value;
+
+        if (type === 'yesno') {
+            const sel = document.getElementById('yesnoCorrect');
+            const isYes = sel ? sel.value === 'yes' : true;
+            return [
+                { text: 'Yes', text_es: 'Sí', correct: isYes },
+                { text: 'No', text_es: 'No', correct: !isYes }
+            ];
+        }
+
+        if (type === 'statements') {
+            // Generate answers from statements editor
+            const statements = this.getStatementsFromEditor();
+            if (statements.length === 0) return [];
+            // Build the correct combination answer and alternatives
+            const correctCombo = statements.map(s => s.correct ? I18N.t('yes') : I18N.t('no')).join(', ');
+            const correctComboEs = statements.map(s => s.correct ? 'Sí' : 'No').join(', ');
+            // Generate answer options: correct combo + some wrong combos
+            const answers = [{ text: correctCombo, text_es: correctComboEs, correct: true }];
+            // Generate 2-3 wrong combos by flipping bits
+            const bits = statements.map(s => s.correct);
+            for (let flip = 0; flip < Math.min(3, statements.length); flip++) {
+                const wrong = [...bits];
+                wrong[flip] = !wrong[flip];
+                const wrongText = wrong.map(b => b ? I18N.t('yes') : I18N.t('no')).join(', ');
+                const wrongTextEs = wrong.map(b => b ? 'Sí' : 'No').join(', ');
+                if (wrongText !== correctCombo) {
+                    answers.push({ text: wrongText, text_es: wrongTextEs, correct: false });
+                }
+            }
+            return answers;
+        }
+
         const answers = [];
         document.querySelectorAll('.answer-entry').forEach(el => {
             answers.push({
@@ -541,6 +628,94 @@ const App = {
             });
         });
         return answers;
+    },
+
+    onQuestionTypeChange() {
+        const type = document.getElementById('questionType').value;
+        const answersGroup = document.getElementById('answersEditor').parentElement;
+        const addAnswerBtn = document.getElementById('btnAddAnswer');
+        const bracketGroup = document.getElementById('bracketContextGroup');
+        const statementsGroup = document.getElementById('statementsGroup');
+
+        // Show/hide bracket context field
+        if (bracketGroup) bracketGroup.style.display = type === 'evaluate' ? 'block' : 'none';
+        // Show/hide statements editor
+        if (statementsGroup) statementsGroup.style.display = type === 'statements' ? 'block' : 'none';
+        // Show/hide add answer button
+        if (addAnswerBtn) addAnswerBtn.style.display = (type === 'yesno' || type === 'statements') ? 'none' : 'inline-flex';
+
+        // Reset answers for type change
+        if (type === 'yesno') {
+            this.renderAnswersEditor([{ text: 'Yes', text_es: 'Sí', correct: true }, { text: 'No', text_es: 'No', correct: false }]);
+        } else if (type === 'evaluate') {
+            const current = this.getAnswersFromEditor();
+            if (!current.length || current[0]?.text !== 'No change needed') {
+                this.renderAnswersEditor([
+                    { text: 'No change needed', text_es: 'No se necesita cambio', correct: false },
+                    { text: '', correct: false },
+                    { text: '', correct: false }
+                ]);
+            }
+        } else if (type === 'statements') {
+            if (!document.querySelector('.statement-entry')) {
+                this.renderStatementsEditor([{ text: '', text_es: '', correct: true }]);
+            }
+            this.renderAnswersEditor([]);
+        } else {
+            // single/multi - keep existing answers or set defaults
+            const current = this.getAnswersFromEditor();
+            if (current.length === 0 || (current.length === 2 && current[0].text === 'Yes')) {
+                this.renderAnswersEditor([
+                    { text: '', correct: false },
+                    { text: '', correct: false },
+                    { text: '', correct: false },
+                    { text: '', correct: false }
+                ]);
+            } else {
+                this.renderAnswersEditor(current);
+            }
+        }
+    },
+
+    // ===== Statements Editor (for 'statements' type) =====
+    renderStatementsEditor(statements) {
+        const container = document.getElementById('statementsEditor');
+        if (!container) return;
+        container.innerHTML = statements.map((s, i) => `
+            <div class="statement-entry">
+                <span class="statement-num">${i + 1}.</span>
+                <input type="text" class="statement-text" data-idx="${i}" value="${this.escapeHtml(s.text)}" placeholder="${I18N.t('statementPlaceholder')} (EN)">
+                <input type="text" class="statement-text-es" data-idx="${i}" value="${this.escapeHtml(s.text_es || '')}" placeholder="Enunciado (ES)">
+                <select class="statement-correct" data-idx="${i}">
+                    <option value="yes" ${s.correct ? 'selected' : ''}>${I18N.t('yes')}</option>
+                    <option value="no" ${!s.correct ? 'selected' : ''}>${I18N.t('no')}</option>
+                </select>
+                <button class="btn btn-danger btn-sm" onclick="App.removeStatement(${i})"><i class="fas fa-times"></i></button>
+            </div>`).join('');
+    },
+
+    getStatementsFromEditor() {
+        const statements = [];
+        document.querySelectorAll('.statement-entry').forEach(el => {
+            statements.push({
+                text: el.querySelector('.statement-text').value.trim(),
+                text_es: el.querySelector('.statement-text-es')?.value.trim() || '',
+                correct: el.querySelector('.statement-correct').value === 'yes'
+            });
+        });
+        return statements;
+    },
+
+    addStatementEntry() {
+        const statements = this.getStatementsFromEditor();
+        statements.push({ text: '', text_es: '', correct: true });
+        this.renderStatementsEditor(statements);
+    },
+
+    removeStatement(idx) {
+        const statements = this.getStatementsFromEditor();
+        statements.splice(idx, 1);
+        this.renderStatementsEditor(statements);
     },
 
     addAnswerEntry() {
@@ -564,8 +739,17 @@ const App = {
         const answers = this.getAnswersFromEditor().filter(a => a.text);
 
         if (!text) { this.toast(I18N.t('questionRequired'), 'error'); return; }
-        if (answers.length < 2) { this.toast(I18N.t('minTwoAnswers'), 'error'); return; }
-        if (!answers.some(a => a.correct)) { this.toast(I18N.t('needCorrectAnswer'), 'error'); return; }
+
+        // Validation varies by type
+        if (type === 'yesno') {
+            // Always valid - 2 answers auto-generated
+        } else if (type === 'statements') {
+            const statements = this.getStatementsFromEditor().filter(s => s.text);
+            if (statements.length < 2) { this.toast(I18N.t('statementsList') + ': min 2', 'error'); return; }
+        } else {
+            if (answers.length < 2) { this.toast(I18N.t('minTwoAnswers'), 'error'); return; }
+            if (!answers.some(a => a.correct)) { this.toast(I18N.t('needCorrectAnswer'), 'error'); return; }
+        }
 
         const cert = this.getActiveCert();
         const text_es = document.getElementById('questionText_es').value.trim();
@@ -582,6 +766,17 @@ const App = {
             explanation,
             explanation_es
         };
+
+        // Add type-specific fields
+        if (type === 'evaluate') {
+            question.bracketContext = document.getElementById('bracketContext')?.value.trim() || '';
+            question.bracketContext_es = document.getElementById('bracketContext_es')?.value.trim() || '';
+        }
+        if (type === 'statements') {
+            question.statements = this.getStatementsFromEditor().filter(s => s.text);
+            // Auto-generate answers from statements
+            question.answers = this.getAnswersFromEditor();
+        }
 
         if (this.editingQuestionId) {
             question.id = this.editingQuestionId;
@@ -722,7 +917,7 @@ const App = {
         const shuffled = [...available].sort(() => Math.random() - 0.5);
         const selected = shuffled.slice(0, count).map(q => ({
             ...q,
-            answers: [...q.answers].sort(() => Math.random() - 0.5), // shuffle answers
+            answers: (q.type === 'yesno' || q.type === 'statements') ? [...q.answers] : [...q.answers].sort(() => Math.random() - 0.5), // don't shuffle yesno/statements
             userAnswers: [],
             checked: false
         }));
@@ -811,31 +1006,87 @@ const App = {
                 ? `(Selecciona ${correctCount} respuestas)`
                 : `(Select ${correctCount} answers)`;
             hint.style.display = 'block';
+        } else if (q.type === 'evaluate' && q.bracketContext) {
+            hint.innerHTML = `<em>${this.escapeHtml(this.lt(q, 'bracketContext'))}</em>`;
+            hint.style.display = 'block';
+        } else if (q.type === 'statements' && q.statements) {
+            const stmtHtml = q.statements.map((s, i) =>
+                `<div class="statement-line">${i + 1}. ${this.escapeHtml(this.lt(s, 'text'))}</div>`
+            ).join('');
+            hint.innerHTML = stmtHtml;
+            hint.style.display = 'block';
         } else {
             hint.style.display = 'none';
         }
 
         // Answers
         const optionsContainer = document.getElementById('testAnswerOptions');
-        optionsContainer.innerHTML = q.answers.map((a, i) => {
-            const letter = String.fromCharCode(65 + i);
-            const isSelected = q.userAnswers.includes(i);
-            let classes = `answer-option ${q.type === 'multi' ? 'multi' : ''}`;
-            if (isSelected && !q.checked) classes += ' selected';
 
-            if (q.checked) {
-                classes += ' checked';
-                if (a.correct && isSelected) classes += ' correct';
-                else if (a.correct && !isSelected) classes += ' missed';
-                else if (!a.correct && isSelected) classes += ' incorrect';
-            }
+        if (q.type === 'yesno') {
+            // Render big Yes/No buttons
+            optionsContainer.innerHTML = q.answers.map((a, i) => {
+                const isSelected = q.userAnswers.includes(i);
+                const isYes = a.text === 'Yes' || a.text === 'Sí';
+                let classes = `yesno-option ${isYes ? 'yes' : 'no'}`;
+                if (isSelected && !q.checked) classes += ' selected';
+                if (q.checked) {
+                    classes += ' checked';
+                    if (a.correct && isSelected) classes += ' correct';
+                    else if (a.correct && !isSelected) classes += ' missed';
+                    else if (!a.correct && isSelected) classes += ' incorrect';
+                }
+                return `
+                    <div class="${classes}" data-idx="${i}" onclick="App.selectAnswer(${i})">
+                        <i class="fas fa-${isYes ? 'check' : 'times'}"></i>
+                        <span>${this.escapeHtml(this.lt(a, 'text'))}</span>
+                    </div>`;
+            }).join('');
+        } else if (q.type === 'statements') {
+            // Render combo answers with statement context
+            optionsContainer.innerHTML = q.answers.map((a, i) => {
+                const letter = String.fromCharCode(65 + i);
+                const isSelected = q.userAnswers.includes(i);
+                let classes = 'answer-option statements-option';
+                if (isSelected && !q.checked) classes += ' selected';
+                if (q.checked) {
+                    classes += ' checked';
+                    if (a.correct && isSelected) classes += ' correct';
+                    else if (a.correct && !isSelected) classes += ' missed';
+                    else if (!a.correct && isSelected) classes += ' incorrect';
+                }
+                // Format: show each statement number with its yes/no value
+                const vals = a.text.split(', ');
+                const comboHtml = (q.statements || []).map((s, si) =>
+                    `<span class="stmt-val">${si + 1}=${vals[si] || '?'}</span>`
+                ).join(' ');
+                return `
+                    <div class="${classes}" data-idx="${i}" onclick="App.selectAnswer(${i})">
+                        <span class="answer-marker">${letter}</span>
+                        <span class="stmt-combo">${comboHtml}</span>
+                    </div>`;
+            }).join('');
+        } else {
+            // Standard single/multi/evaluate rendering
+            optionsContainer.innerHTML = q.answers.map((a, i) => {
+                const letter = String.fromCharCode(65 + i);
+                const isSelected = q.userAnswers.includes(i);
+                let classes = `answer-option ${q.type === 'multi' ? 'multi' : ''}`;
+                if (isSelected && !q.checked) classes += ' selected';
 
-            return `
-                <div class="${classes}" data-idx="${i}" onclick="App.selectAnswer(${i})">
-                    <span class="answer-marker">${letter}</span>
-                    <span>${this.escapeHtml(this.lt(a, 'text'))}</span>
-                </div>`;
-        }).join('');
+                if (q.checked) {
+                    classes += ' checked';
+                    if (a.correct && isSelected) classes += ' correct';
+                    else if (a.correct && !isSelected) classes += ' missed';
+                    else if (!a.correct && isSelected) classes += ' incorrect';
+                }
+
+                return `
+                    <div class="${classes}" data-idx="${i}" onclick="App.selectAnswer(${i})">
+                        <span class="answer-marker">${letter}</span>
+                        <span>${this.escapeHtml(this.lt(a, 'text'))}</span>
+                    </div>`;
+            }).join('');
+        }
 
         // Explanation
         const explDiv = document.getElementById('testExplanation');

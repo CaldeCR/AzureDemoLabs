@@ -209,7 +209,24 @@
                                 <select id="questionType">
                                     <option value="single" data-i18n="singleAnswer">Single Answer</option>
                                     <option value="multi" data-i18n="multiAnswer">Multiple Answers</option>
+                                    <option value="yesno" data-i18n="yesNoAnswer">Yes / No</option>
+                                    <option value="evaluate" data-i18n="evaluateAnswer">Evaluate (Bracket Replace)</option>
+                                    <option value="statements" data-i18n="statementsAnswer">Statement Evaluation</option>
                                 </select>
+                            </div>
+                            <!-- Bracket Context (for evaluate type) -->
+                            <div class="form-group" id="bracketContextGroup" style="display:none;">
+                                <label data-i18n="bracketContext">Statement with [bracketed term]</label>
+                                <textarea id="bracketContext" rows="2" data-i18n-placeholder="bracketContextPlaceholder" placeholder="Enter statement with the term in [brackets]..."></textarea>
+                                <textarea id="bracketContext_es" rows="2" placeholder="Enunciado con [término entre corchetes] (ES)..." style="margin-top:0.5rem;"></textarea>
+                            </div>
+                            <!-- Statements Editor (for statements type) -->
+                            <div class="form-group" id="statementsGroup" style="display:none;">
+                                <label data-i18n="statementsList">Statements</label>
+                                <div id="statementsEditor" class="statements-editor"></div>
+                                <button id="btnAddStatement" class="btn btn-secondary btn-sm">
+                                    <i class="fas fa-plus"></i> <span data-i18n="addStatement">Add Statement</span>
+                                </button>
                             </div>
                             <div class="form-group">
                                 <label data-i18n="answers">Answers</label>

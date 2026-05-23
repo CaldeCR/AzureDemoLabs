@@ -1120,3 +1120,135 @@ input:focus, textarea:focus, select:focus {
 }
 
 .pagination button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ===== Yes/No Question Type ===== */
+.yesno-preview {
+    display: flex;
+    gap: 1rem;
+    margin: 0.5rem 0;
+}
+
+.yesno-btn-preview {
+    flex: 1;
+    padding: 1rem;
+    border-radius: var(--radius);
+    text-align: center;
+    font-weight: 700;
+    font-size: 1rem;
+    opacity: 0.6;
+}
+
+.yesno-btn-preview.yes {
+    background: var(--success-light);
+    color: var(--success);
+    border: 2px solid var(--success);
+}
+
+.yesno-btn-preview.no {
+    background: var(--danger-light);
+    color: var(--danger);
+    border: 2px solid var(--danger);
+}
+
+/* Test - Yes/No buttons */
+.yesno-option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1.25rem 2rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 700;
+    transition: all 0.2s;
+    border: 2px solid var(--border);
+    background: var(--bg-card);
+    margin-bottom: 0.75rem;
+}
+
+.yesno-option.yes:hover { border-color: var(--success); background: var(--success-light); }
+.yesno-option.no:hover { border-color: var(--danger); background: var(--danger-light); }
+
+.yesno-option.selected.yes { border-color: var(--success); background: var(--success-light); color: var(--success); }
+.yesno-option.selected.no { border-color: var(--danger); background: var(--danger-light); color: var(--danger); }
+
+.yesno-option.checked.correct { border-color: var(--success); background: var(--success-light); color: var(--success); }
+.yesno-option.checked.incorrect { border-color: var(--danger); background: var(--danger-light); color: var(--danger); }
+.yesno-option.checked.missed { border-color: var(--success); background: var(--success-light); opacity: 0.6; }
+
+.yesno-option i { font-size: 1.3rem; }
+
+/* ===== Statements Editor ===== */
+.statements-editor {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.statement-entry {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: var(--bg-hover);
+    border-radius: var(--radius-sm);
+}
+
+.statement-entry .statement-num {
+    font-weight: 700;
+    color: var(--primary);
+    min-width: 24px;
+}
+
+.statement-entry .statement-text,
+.statement-entry .statement-text-es {
+    flex: 1;
+    padding: 0.4rem 0.6rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--bg-input);
+    color: var(--text);
+    font-size: 0.85rem;
+}
+
+.statement-entry .statement-correct {
+    padding: 0.4rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--bg-input);
+    color: var(--text);
+    font-size: 0.85rem;
+    min-width: 60px;
+}
+
+/* Test - Statement lines in hint */
+.statement-line {
+    padding: 0.4rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+}
+
+.statement-line:last-child { border-bottom: none; }
+
+/* Test - Statement combo answers */
+.statements-option .stmt-combo {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.stmt-val {
+    background: var(--bg-hover);
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* ===== Evaluate type - no-change entry ===== */
+.no-change-entry .answer-text {
+    font-style: italic;
+    background: var(--bg-hover);
+}
