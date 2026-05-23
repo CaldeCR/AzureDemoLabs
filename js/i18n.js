@@ -5,7 +5,7 @@ const I18N = {
     translations: {
         en: {
             // Navbar
-            appTitle: 'Azure Certification Quiz',
+            appTitle: 'AzureDemoLabs',
 
             // Navigation
             navDashboard: 'Dashboard',
@@ -157,7 +157,7 @@ const I18N = {
 
         es: {
             // Navbar
-            appTitle: 'Quiz de Certificación Azure',
+            appTitle: 'AzureDemoLabs',
 
             // Navigation
             navDashboard: 'Inicio',
